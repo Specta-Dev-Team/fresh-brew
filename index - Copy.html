@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order | Custom Interface</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- SCOPED VARIABLES & RESET --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F3F4F6;
+        }
+
+        .ax-custom-wrapper {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #64748B;
+            --bg-body: #F3F4F6;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --text-main: #111827;
+            --radius-lg: 16px;
+            --font-main: 'Inter', sans-serif;
+
+            font-family: var(--font-main) !important;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .ax-custom-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .ax-glass-card {
+            width: 100%;
+            max-width: 1400px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* --- HEADER --- */
+        .ax-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 1rem;
+        }
+
+        .ax-page-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .ax-page-title p {
+            color: var(--secondary);
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+            margin-bottom: 0;
+        }
+
+        /* --- FORM --- */
+        .ax-form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ax-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .ax-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .ax-custom-wrapper label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* Required field indicator */
+        .required::after {
+            content: ' *';
+            color: #EF4444;
+            font-weight: 600;
+        }
+
+        .ax-custom-wrapper input,
+        .ax-custom-wrapper select,
+        .ax-custom-wrapper textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 1px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.85rem;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .ax-custom-wrapper input:read-only {
+            background-color: #FAFAFA;
+            color: #666;
+        }
+
+        .ax-custom-wrapper input:focus,
+        .ax-custom-wrapper select:focus,
+        .ax-custom-wrapper textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- TABS --- */
+        .ax-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .ax-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--secondary);
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+        }
+
+        .ax-tab:hover {
+            color: var(--primary);
+        }
+
+        .ax-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .ax-tab-content {
+            display: none;
+        }
+
+        .ax-tab-content.active {
+            display: block;
+        }
+
+        /* --- TABLE --- */
+        .ax-table-container {
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .ax-custom-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .ax-custom-wrapper th {
+            text-align: left;
+            padding: 0.6rem 0.75rem;
+            background: #F8FAFC;
+            font-weight: 600;
+            color: var(--secondary);
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 0.8rem;
+        }
+
+        .ax-custom-wrapper td {
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .ax-custom-wrapper td input,
+        .ax-custom-wrapper td select {
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 0.5rem;
+        }
+
+        .ax-custom-wrapper td input:focus,
+        .ax-custom-wrapper td select:focus {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        /* --- FOOTER --- */
+        .ax-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #F1F5F9;
+        }
+
+        .ax-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            gap: 0.4rem;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .ax-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .ax-btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        .ax-btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .ax-btn-white {
+            background: white;
+            border: 1px solid #E2E8F0;
+            color: var(--text-main);
+        }
+
+        .ax-btn-white:hover {
+            background: #F8FAFC;
+            border-color: #CBD5E1;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+
+        /* Checkbox inline label */
+        .inline-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .inline-checkbox input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        /* --- SUMMARY PANEL --- */
+        .summary-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        .summary-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .summary-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 999;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .summary-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .summary-panel {
+            position: fixed;
+            top: 0;
+            right: -550px;
+            width: 100%;
+            max-width: 520px;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 250, 251, 0.98) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1), -5px 0 20px rgba(79, 70, 229, 0.05);
+            border-left: 1px solid rgba(79, 70, 229, 0.1);
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+        }
+
+        .summary-panel * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Exception for Material Icons */
+        .summary-panel .material-icons {
+            font-family: 'Material Icons' !important;
+        }
+
+        .summary-panel.active {
+            right: 0;
+        }
+
+        .summary-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.75rem 1.5rem;
+            border-bottom: 2px solid rgba(241, 245, 249, 0.8);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .summary-panel-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-panel-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .close-panel-btn:hover {
+            color: var(--text-main);
+        }
+
+        .summary-panel-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        /* Ensure panel inputs match main form */
+        .summary-panel input,
+        .summary-panel select,
+        .summary-panel textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            outline: none;
+        }
+
+        .summary-panel input:read-only {
+            background-color: #FAFAFA;
+            color: #666;
+        }
+
+        .summary-panel input:focus,
+        .summary-panel select:focus,
+        .summary-panel textarea:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .summary-panel label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #64748B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ax-custom-wrapper">
+        <div class="ax-glass-card">
+
+            <!-- HEADER -->
+            <div class="ax-header">
+                <div class="ax-page-title">
+                    <h1>Purchase Order</h1>
+                    <p>Create and manage vendor purchase orders</p>
+                </div>
+                <div class="ax-header-actions" style="display: flex; gap: 1rem; align-items: flex-end;">
+                    <div class="ax-form-group">
+                        <label>PO Number</label>
+                        <input type="text" id="po_no" placeholder="Auto" value="Auto" readonly
+                            style="width: 150px; text-align:center;">
+                    </div>
+                    <button class="summary-btn" onclick="toggleSummaryPanel()">
+                        <span class="material-icons" style="font-size: 18px;">receipt_long</span>
+                        Summary
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAIN FORM -->
+            <div class="ax-form-section">
+                <!-- SECTION 1: General Information -->
+                <div class="ax-section-title"><span class="material-icons">domain</span> General Information</div>
+
+                <!-- Row 1 -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label class="required">Company</label>
+                        <select id="company">
+                            <option value="">Select an option</option>
+                            <option value="Vintage Teas Ceylon (Pvt) Ltd" selected>Vintage Teas Ceylon (Pvt) Ltd
+                            </option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label class="required">Purchase Type</label>
+                        <select id="purchase_type">
+                            <option value="Local" selected>Local</option>
+                            <option value="Import">Import</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Item Type</label>
+                        <select id="item_type">
+                            <option value="">Select an option</option>
+                            <option value="Raw Material">Raw Material</option>
+                            <option value="Finished Goods">Finished Goods</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>PO Date</label>
+                        <input type="date" id="po_date">
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label>Currency</label>
+                        <select id="currency">
+                            <option value="">Select an option</option>
+                            <option value="USD" selected>USD</option>
+                            <option value="LKR">LKR</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label class="required">Supplier</label>
+                        <select id="supplier">
+                            <option value="">Select an option</option>
+                            <option value="ABC Suppliers">ABC Suppliers Ltd</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label class="required">Bill To</label>
+                        <select id="bill_to">
+                            <option value="">Select an option</option>
+                            <option value="Head Office">Head Office</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Payment Term</label>
+                        <select id="payment_term">
+                            <option value="">Select an option</option>
+                            <option value="Net 30">Net 30</option>
+                            <option value="Immediate">Immediate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Logistics & Terms -->
+                <div class="ax-section-title mt-4"><span class="material-icons">local_shipping</span> Logistics & Terms
+                </div>
+
+                <!-- Row 3 -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label>Delivery Date</label>
+                        <input type="date" id="delivery_date">
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Delivery Terms</label>
+                        <select id="delivery_terms">
+                            <option value="">Select an option</option>
+                            <option value="CIF">CIF</option>
+                            <option value="FOB">FOB</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Ship. Mode</label>
+                        <select id="ship_mode">
+                            <option value="ROAD" selected>ROAD</option>
+                            <option value="AIR">AIR</option>
+                            <option value="SEA">SEA</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Shipment Term</label>
+                        <select id="shipment_term">
+                            <option value="NA" selected>NA</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 4: Checkboxes -->
+                <div class="ax-grid-4" style="align-items: center;">
+                    <div class="ax-form-group">
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <span>LC ?</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="lc">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="ax-form-group">
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <span>Fore Close</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="fore_close">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="ax-form-group inline-checkbox">
+                        <input type="checkbox" id="grnflag">
+                        <label for="grnflag" style="margin: 0;">grnflag</label>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: Description -->
+                <div class="ax-form-group">
+                    <label>Description</label>
+                    <textarea id="description" rows="3" placeholder="Enter description..."></textarea>
+                </div>
+
+                <!-- SECTION 4: TABS -->
+                <div class="mt-4">
+                    <div class="ax-tabs">
+                        <button class="ax-tab active" onclick="switchTab('item_particulars')">Item Particulars</button>
+                        <button class="ax-tab" onclick="switchTab('terms_conditions')">Terms and Conditions</button>
+                    </div>
+
+                    <!-- Tab 1: Item Particulars -->
+                    <div id="item_particulars" class="ax-tab-content active">
+                        <div class="ax-table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px; text-align:center;">S no</th>
+                                        <th>Item Code</th>
+                                        <th>UOM</th>
+                                        <th>Item Name</th>
+                                        <th>Garden</th>
+                                        <th>Grade</th>
+                                        <th class="text-right">PR Qty.</th>
+                                        <th style="width: 60px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="items_grid_body">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                            <div style="background: #F8FAFC; padding: 0.75rem 1rem;">
+                                <button class="ax-btn ax-btn-white" style="padding: 0.4rem 1rem; font-size: 0.85rem;"
+                                    onclick="addItemRow()">
+                                    <span class="material-icons" style="font-size: 16px;">add</span> New
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Terms and Conditions -->
+                    <div id="terms_conditions" class="ax-tab-content">
+                        <div class="ax-table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px;">S.No</th>
+                                        <th>Terms and Conditions</th>
+                                        <th style="width: 60px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="terms_grid_body">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                            <div style="background: #F8FAFC; padding: 0.75rem 1rem;">
+                                <button class="ax-btn ax-btn-white" style="padding: 0.4rem 1rem; font-size: 0.85rem;"
+                                    onclick="addTermRow()">
+                                    <span class="material-icons" style="font-size: 16px;">add</span> New
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="ax-footer">
+                <button class="ax-btn ax-btn-primary">
+                    <span class="material-icons" style="font-size:18px;">add_circle_outline</span> New
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Overlay -->
+    <div class="summary-overlay" id="summaryOverlay" onclick="toggleSummaryPanel()"></div>
+
+    <!-- Summary Panel -->
+    <div class="summary-panel" id="summaryPanel">
+        <div class="summary-panel-header">
+            <h2>
+                <span class="material-icons">receipt_long</span>
+                Summary
+            </h2>
+            <button class="close-panel-btn" onclick="toggleSummaryPanel()">
+                <span class="material-icons" style="font-size: 28px;">close</span>
+            </button>
+        </div>
+        <div class="summary-panel-content">
+            <!-- Summary Fields -->
+            <div class="ax-form-group">
+                <label>Total Shipment Charges[LC]</label>
+                <input type="number" id="total_shipment_lc" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Total Shipment Charges[FC]</label>
+                <input type="number" id="total_shipment_fc" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Tot. Value {FOB}</label>
+                <input type="number" id="total_value_fob" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Tot. Value FOB [LC]</label>
+                <input type="number" id="total_value_fob_lc" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Advance (%)</label>
+                <input type="number" id="advance_percent" placeholder="0">
+            </div>
+            <div class="ax-form-group">
+                <label>Advance Amount</label>
+                <input type="number" id="advance_amount" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Due Date</label>
+                <input type="date" id="due_date">
+            </div>
+            <div class="ax-form-group">
+                <label>Total Tax Amt.</label>
+                <input type="number" id="total_tax_amt" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Total Tax Amt. [LC]</label>
+                <input type="number" id="total_tax_amt_lc" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Total PO Value</label>
+                <input type="number" id="total_po_value" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Total PO Value [LC]</label>
+                <input type="number" id="total_po_value_lc" placeholder="0.00" readonly>
+            </div>
+            <div class="ax-form-group">
+                <label>Delivery Address</label>
+                <textarea id="delivery_address" rows="3" placeholder="Enter delivery address..."></textarea>
+            </div>
+            <div class="ax-form-group">
+                <label>Remarks / Printing Instruction</label>
+                <textarea id="remarks" rows="3" placeholder="Enter remarks..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // --- FRONTEND ONLY LOGIC ---
+
+            // 1. Initialize Dates
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('po_date').value = today;
+            document.getElementById('delivery_date').value = today;
+            document.getElementById('due_date').value = today;
+
+            // 2. Tab Switching
+            window.switchTab = function (tabId) {
+                // Hide all tabs
+                document.querySelectorAll('.ax-tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelectorAll('.ax-tab').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show selected tab
+                document.getElementById(tabId).classList.add('active');
+                event.target.classList.add('active');
+            }
+
+            // 3. Item Particulars Grid
+            window.addItemRow = function () {
+                const tbody = document.getElementById('items_grid_body');
+                const rowCount = tbody.querySelectorAll('tr').length + 1;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="text-align:center; color:var(--secondary);">${rowCount}</td>
+                    <td>
+                        <select style="width: 100%;">
+                            <option value="">Select an option</option>
+                            <option value="ITEM001">ITEM001</option>
+                            <option value="ITEM002">ITEM002</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="UOM"></td>
+                    <td><input type="text" placeholder="Item Name" style="border-color: #EF4444;"></td>
+                    <td>
+                        <select style="width: 100%;">
+                            <option value="">Select an option</option>
+                            <option value="Garden A">Garden A</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select style="width: 100%;">
+                            <option value="">Select a...</option>
+                            <option value="Grade A">Grade A</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="text-right" placeholder="0"></td>
+                    <td style="text-align:center;">
+                        <button style="background:none; border:none; color:#EF4444; cursor:pointer; padding:4px;" onclick="removeRow(this, 'items_grid_body')">
+                            <span class="material-icons" style="font-size:18px;">delete</span>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            // 4. Terms and Conditions Grid
+            window.addTermRow = function () {
+                const tbody = document.getElementById('terms_grid_body');
+                const rowCount = tbody.querySelectorAll('tr').length + 1;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="text-align:center; color:var(--secondary);">${rowCount}</td>
+                    <td><input type="text" placeholder="Enter terms and conditions..."></td>
+                    <td style="text-align:center;">
+                        <button style="background:none; border:none; color:#EF4444; cursor:pointer; padding:4px;" onclick="removeRow(this, 'terms_grid_body')">
+                            <span class="material-icons" style="font-size:18px;">delete</span>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            // 5. Remove Row
+            window.removeRow = function (btn, tbodyId) {
+                const row = btn.closest('tr');
+                row.remove();
+                // Re-index rows
+                const rows = document.getElementById(tbodyId).querySelectorAll('tr');
+                rows.forEach((r, index) => {
+                    r.cells[0].innerText = index + 1;
+                });
+            }
+
+            // Initialize with default rows
+            addItemRow();
+            addTermRow();
+
+            // 6. Toggle Summary Panel
+            window.toggleSummaryPanel = function () {
+                const panel = document.getElementById('summaryPanel');
+                const overlay = document.getElementById('summaryOverlay');
+
+                panel.classList.toggle('active');
+                overlay.classList.toggle('active');
+
+                // Prevent body scroll when panel is open
+                if (panel.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+
+        })();
+    </script>
+</body>
+
+</html>
