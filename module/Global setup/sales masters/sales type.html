@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Type | Global Setup</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- SCOPED VARIABLES & RESET --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F3F4F6;
+        }
+
+        .ax-custom-wrapper {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #64748B;
+            --bg-body: #F3F4F6;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --text-main: #111827;
+            --radius-lg: 16px;
+            --font-main: 'Inter', sans-serif;
+
+            font-family: var(--font-main) !important;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .ax-custom-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .ax-glass-card {
+            width: 100%;
+            max-width: 600px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* --- HEADER --- */
+        .ax-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0.25rem 0.75rem 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ax-page-title h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* --- FORM GRID --- */
+        .ax-form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .ax-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .ax-grid-1 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .ax-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .ax-custom-wrapper label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        /* Required field indicator */
+        .required::after {
+            content: ' *';
+            color: #EF4444;
+            font-weight: 600;
+        }
+
+        .ax-custom-wrapper input,
+        .ax-custom-wrapper select,
+        .ax-custom-wrapper textarea {
+            width: 100%;
+            padding: 0.75rem 0.875rem;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.95rem;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .input-error {
+            border-left: 3px solid #EF4444 !important;
+        }
+
+        .ax-custom-wrapper input:focus,
+        .ax-custom-wrapper select:focus,
+        .ax-custom-wrapper textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* --- FOOTER --- */
+        .ax-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid #F1F5F9;
+            margin-top: 1rem;
+        }
+
+        .ax-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2.25rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            min-width: 140px;
+            gap: 0.5rem;
+        }
+
+        .ax-btn-white {
+            background: white;
+            border: 1px solid #E2E8F0;
+            color: var(--text-main);
+        }
+
+        .ax-btn-white:hover {
+            background: #F8FAFC;
+            border-color: #CBD5E1;
+        }
+
+        .ax-btn-primary {
+            background: #3B82F6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .ax-btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-1px);
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            width: 100%;
+            margin-top: 0.25rem;
+        }
+
+        .toggle-switch-group label {
+            margin: 0;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+            white-space: nowrap;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: #3182CE;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ax-custom-wrapper">
+        <div class="ax-glass-card">
+
+            <!-- HEADER TITLE -->
+            <div class="ax-header">
+                <div class="ax-page-title" style="display: flex; align-items: center; gap: 1.5rem;">
+                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
+                        <span class="material-icons" style="font-size: 1.5rem;">arrow_back</span>
+                    </button>
+                    <h1 style="font-size: 1.4rem; font-weight: 700; color: #1e293b; letter-spacing: -0.01em;">Sales Type</h1>
+                </div>
+                <div class="ax-header-actions" style="display: flex; align-items: center; gap: 2.5rem;">
+                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #088a6d;">
+                        <span class="material-icons" style="font-size: 1.6rem;">search</span>
+                    </button>
+                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
+                        <span class="material-icons" style="font-size: 1.6rem;">menu</span>
+                    </button>
+                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
+                        <span class="material-icons" style="font-size: 1.6rem;">grid_view</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM CONTENT -->
+            <div class="ax-form-section">
+                <!-- Row 1 -->
+                <div class="ax-grid-1">
+                    <div class="ax-form-group">
+                        <label class="required">Company</label>
+                        <select id="company">
+                            <option value="">Select an option</option>
+                            <option value="Vintage Teas Ceylon (Pvt) Ltd" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="ax-grid-1">
+                    <div class="ax-form-group">
+                        <label class="required">Sales Type</label>
+                        <input type="text" id="sales_type" placeholder="Enter sales type...">
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="ax-grid-1">
+                    <div class="ax-form-group">
+                        <label class="required">Sales Type Code</label>
+                        <input type="text" id="sales_type_code" placeholder="Enter sales type code...">
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="ax-grid-1">
+                    <div class="ax-form-group">
+                        <label class="required">Sales Account</label>
+                        <select id="sales_account">
+                            <option value="">Select an option</option>
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="ax-grid-1">
+                    <div class="ax-form-group">
+                        <label>Is Export</label>
+                        <div class="toggle-switch-group">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="is_export">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="ax-footer">
+                <button class="ax-btn ax-btn-white" onclick="handleNew()">
+                    <span class="material-icons" style="font-size: 18px;">add</span>
+                    New
+                </button>
+                <button class="ax-btn ax-btn-primary" onclick="handleSubmit()">
+                    <span class="material-icons" style="font-size: 18px;">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company').value;
+            const salesType = document.getElementById('sales_type').value;
+            const salesTypeCode = document.getElementById('sales_type_code').value;
+            const salesAccount = document.getElementById('sales_account').value;
+            const isExport = document.getElementById('is_export').checked;
+
+            // Validate required fields
+            if (!company || !salesType || !salesTypeCode || !salesAccount) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            console.log({
+                company,
+                salesType,
+                salesTypeCode,
+                salesAccount,
+                isExport
+            });
+
+            alert('Sales Type saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            document.getElementById('sales_type').value = '';
+            document.getElementById('sales_type_code').value = '';
+            document.getElementById('sales_account').value = '';
+            document.getElementById('is_export').checked = false;
+            document.getElementById('sales_type').focus();
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            // Add form validation on input
+            document.getElementById('sales_type').addEventListener('blur', function() {
+                if (!this.value) {
+                    this.classList.add('input-error');
+                } else {
+                    this.classList.remove('input-error');
+                }
+            });
+
+            document.getElementById('sales_type_code').addEventListener('blur', function() {
+                if (!this.value) {
+                    this.classList.add('input-error');
+                } else {
+                    this.classList.remove('input-error');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
