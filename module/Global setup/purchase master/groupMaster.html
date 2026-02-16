@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Master | Custom Interface</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- SCOPED VARIABLES & RESET --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F3F4F6;
+        }
+
+        .ax-custom-wrapper {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #64748B;
+            --bg-body: #F3F4F6;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --text-main: #111827;
+            --radius-lg: 16px;
+            --font-main: 'Inter', sans-serif;
+
+            font-family: var(--font-main) !important;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .ax-custom-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .ax-glass-card {
+            width: 100%;
+            max-width: 1400px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: auto;
+        }
+
+        /* --- HEADER --- */
+        .ax-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ax-page-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .ax-page-title p {
+            color: var(--secondary);
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+            margin-bottom: 0;
+        }
+
+        .ax-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ax-header-actions button {
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all 0.2s;
+        }
+
+        .ax-header-actions button:hover {
+            background: #F8FAFC;
+            color: var(--primary);
+        }
+
+        /* --- FORM --- */
+        .ax-form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ax-section-card {
+            display: none;
+        }
+
+        .ax-section-content {
+            display: none;
+        }
+
+        .ax-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toggles-grid-inline {
+            display: none;
+        }
+
+        .toggle-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ax-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0.75rem 0 0.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .ax-section-title .material-icons {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .toggle-label-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-label-container label {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        .ax-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            width: 100%;
+        }
+
+        .ax-custom-wrapper label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* Required field indicator */
+        .required::after {
+            content: ' *';
+            color: #EF4444;
+            font-weight: 600;
+        }
+
+        .ax-custom-wrapper input,
+        .ax-custom-wrapper select,
+        .ax-custom-wrapper textarea {
+            width: 100%;
+            max-width: 100%;
+            padding: 0.6rem 0.85rem;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.9rem;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .ax-custom-wrapper input:read-only {
+            background-color: #FAFAFA;
+            color: #666;
+        }
+
+        .ax-custom-wrapper input:focus,
+        .ax-custom-wrapper select:focus,
+        .ax-custom-wrapper textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+            margin-top: 0.3rem;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+
+        .toggles-grid {
+            display: none;
+        }
+
+        .divider {
+            height: 1px;
+            background: #E2E8F0;
+            margin: 1rem 0;
+        }
+
+        /* --- FOOTER --- */
+        .ax-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #F1F5F9;
+        }
+
+        .ax-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .ax-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .ax-btn-primary {
+            background: #4F46E5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        .ax-btn-primary:hover {
+            background: #4338CA;
+        }
+
+        .ax-btn-white {
+            background: white;
+            border: 1px solid #E2E8F0;
+            color: var(--text-main);
+        }
+
+        .ax-btn-white:hover {
+            background: #F8FAFC;
+            border-color: #CBD5E1;
+        }
+
+        .grid-icons {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .grid-icons button {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ax-custom-wrapper">
+        <div class="ax-glass-card">
+
+            <!-- HEADER -->
+            <div class="ax-header">
+                <div class="ax-page-title">
+                    <h1>Group Master</h1>
+                </div>
+                <div class="ax-header-actions">
+                    <button title="Search">
+                        <span class="material-icons" style="font-size: 18px;">search</span>
+                    </button>
+                    <button title="List View">
+                        <span class="material-icons" style="font-size: 18px;">list</span>
+                    </button>
+                    <button title="Grid View">
+                        <span class="material-icons" style="font-size: 18px;">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="ax-form-section">
+
+                <!-- SECTION 1: Basic Information -->
+                <div class="ax-section-title">
+                    <span class="material-icons">info</span>
+                    Basic Information
+                </div>
+
+                <div class="ax-grid-2">
+                    <div class="ax-form-group">
+                        <label class="required">Party Type</label>
+                        <select id="partyType">
+                            <option value="">-- Select --</option>
+                            <option value="supplier">Supplier</option>
+                            <option value="buyer">Buyer</option>
+                            <option value="transporter">Transporter</option>
+                        </select>
+                    </div>
+
+                    <div class="ax-form-group">
+                        <label class="required">Group Name</label>
+                        <input type="text" id="groupName" placeholder="Enter group name">
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Status & Configuration -->
+                <div class="ax-section-title">
+                    <span class="material-icons">settings</span>
+                    Status & Configuration
+                </div>
+
+                <div class="ax-grid-2">
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Active</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="active" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: Purchase Types & Business Options -->
+                <div class="ax-section-title">
+                    <span class="material-icons">shopping_cart</span>
+                    Purchase Types & Business Options
+                </div>
+
+                <!-- Purchase Types Row -->
+                <div class="ax-grid-3">
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Tea Purchase?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="teaPurchase">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Import Purchase?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="importPurchase">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Local Purchase?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="localPurchase">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Business Options Row -->
+                <div class="ax-grid-3">
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Sub Contract?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="subContract">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Shipping Carrier?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="shippingCarrier">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-label-container">
+                        <label style="margin-bottom: 0; font-weight: 500;">Loan?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="loan">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="ax-footer">
+                <button class="ax-btn ax-btn-white" onclick="handleNew()">
+                    <span class="material-icons" style="font-size: 18px;">add_circle_outline</span>
+                    New
+                </button>
+                <button class="ax-btn ax-btn-primary" onclick="handleSubmit()">
+                    <span class="material-icons" style="font-size: 18px;">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function handleNew() {
+            document.getElementById('partyType').value = '';
+            document.getElementById('groupName').value = '';
+            document.getElementById('active').checked = true;
+            document.getElementById('teaPurchase').checked = false;
+            document.getElementById('importPurchase').checked = false;
+            document.getElementById('localPurchase').checked = false;
+            document.getElementById('subContract').checked = false;
+            document.getElementById('shippingCarrier').checked = false;
+            document.getElementById('loan').checked = false;
+            console.log('New record initialized');
+        }
+
+        function handleSubmit() {
+            const partyType = document.getElementById('partyType').value;
+            const groupName = document.getElementById('groupName').value;
+
+            if (!partyType || !groupName) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            console.log('Form submitted', {
+                partyType,
+                groupName,
+                active: document.getElementById('active').checked,
+                teaPurchase: document.getElementById('teaPurchase').checked,
+                importPurchase: document.getElementById('importPurchase').checked,
+                localPurchase: document.getElementById('localPurchase').checked,
+                subContract: document.getElementById('subContract').checked,
+                shippingCarrier: document.getElementById('shippingCarrier').checked,
+                loan: document.getElementById('loan').checked
+            });
+
+            alert('Group Master saved successfully!');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded');
+        });
+    </script>
+</body>
+
+</html>

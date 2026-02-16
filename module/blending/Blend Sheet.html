@@ -565,65 +565,125 @@
 
                 <!-- Tab 1: Blend Details -->
                 <div id="blend_details" class="ax-tab-content active">
-                    <div class="ax-table-container">
-                        <table>
+                    <div id="colScroll2" class="griddivColumn wrapperForGridData2 gridFixedHeader" style="overflow: auto;">
+                        <div class="thhead"></div>
+                        <table class="customSetupTableMN gridHeader g-1 table table-striped table-bordered mt-1 mb-0 border-gray-300 table-sm" id="gridHd2" style="width: 2847px;">
                             <thead>
-                                <tr>
-                                    <th style="width: 50px; text-align:center;"></th>
-                                    <th style="width: 40px; text-align:center;">S.No</th>
-                                    <th>Item Code</th>
-                                    <th>Box / Lot No.</th>
-                                    <th>TI No.</th>
-                                    <th>Sale Date</th>
-                                    <th>Permit No.</th>
-                                    <th>Sale Code</th>
-                                    <th>Garden Mark</th>
-                                    <th>Standard</th>
-                                    <th>Country</th>
-                                    <th>Supplier Inv No.</th>
-                                    <th>Tea Grade</th>
-                                    <th style="width: 40px;"></th>
+                                <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-300">
+                                    <th id="uniqueEditDeleteAct2" class="text-center fw-boldest w-20px">
+                                        <div class="form-check form-check-sm form-check-custom ms-2 py-0">
+                                            <input type="checkbox" name="chkallgridrow2" class="form-check-input fgHdrChk gridHdrChk opacity-100" id="chkallgridrow2" onclick="javascript:CheckAllGridRow(this, 2);" disabled="">
+                                        </div>
+                                    </th>
+                                    <th id="uniqueThHead2" class="thhead fw-boldest" style="width: 40px;"><div id="uniqueThHead2-sizer"></div><div class="thhead">S.no</div></th>
+                                    <th class="d-none none" id="th-axp_recid2" data-grid-visible="false" style="display: none;"><div id="th-axp_recid2-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-oldstockqty" data-grid-visible="false" style="display: none;"><div id="th-oldstockqty-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-oldalloctdqty" data-grid-visible="false" style="display: none;"><div id="th-oldalloctdqty-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-itemcode" style="width:93px;" class="fw-boldest"><div id="th-itemcode-sizer"></div><div class="thhead required ">Item Code</div></th>
+                                    <th class="d-none none" id="th-itemid" data-grid-visible="false" style="display: none;"><div id="th-itemid-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-itemname" data-grid-visible="false" style="display: none;"><div id="th-itemname-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-tstriaght" data-grid-visible="false" style="display: none;"><div id="th-tstriaght-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-therbal" data-grid-visible="false" style="display: none;"><div id="th-therbal-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-tblended" data-grid-visible="false" style="display: none;"><div id="th-tblended-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-timport" data-grid-visible="false" style="display: none;"><div id="th-timport-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-tempserialnum" data-grid-visible="false" style="display: none;"><div id="th-tempserialnum-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-serialno" style="width:105px;" class="fw-boldest"><div id="th-serialno-sizer"></div><div class="thhead required ">Box / Lot No.</div></th>
+                                    <th id="th-tino" style="width:103px;" class="fw-boldest"><div id="th-tino-sizer"></div><div class="thhead ">TI No.</div></th>
+                                    <th id="th-saledate" style="width:85px;" class="fw-boldest"><div id="th-saledate-sizer"></div><div class="thhead ">Sale Date</div></th>
+                                    <th id="th-permitno" style="width:115px;" class="fw-boldest"><div id="th-permitno-sizer"></div><div class="thhead ">Permit No.</div></th>
+                                    <th id="th-salecode" style="width:60px;" class="fw-boldest"><div id="th-salecode-sizer"></div><div class="thhead ">Sale Code</div></th>
+                                    <th id="th-gardenmark" style="width:151px;" class="fw-boldest"><div id="th-gardenmark-sizer"></div><div class="thhead ">Garden Mark</div></th>
+                                    <th id="th-standard" style="width:123px;" class="fw-boldest"><div id="th-standard-sizer"></div><div class="thhead ">Standard</div></th>
+                                    <th id="th-country" style="width:84px;" class="fw-boldest"><div id="th-country-sizer"></div><div class="thhead ">Country</div></th>
+                                    <th id="th-suppinvoiceno" style="width:70px;" class="fw-boldest"><div id="th-suppinvoiceno-sizer"></div><div class="thhead ">Supplier Invoice No.</div></th>
+                                    <th id="th-teagrade" style="width:73px;" class="fw-boldest"><div id="th-teagrade-sizer"></div><div class="thhead ">Tea Grade</div></th>
+                                    <th id="th-stockqty" style="width: 101px; display: none;" class="fw-boldest none" data-grid-visible="false"><div id="th-stockqty-sizer"></div><div class="thhead ">Lot Stock Qty.</div></th>
+                                    <th id="th-brokercode" style="width:45px;" class="fw-boldest"><div id="th-brokercode-sizer"></div><div class="thhead ">Broker Code</div></th>
+                                    <th id="th-suplotnum" style="width:61px;" class="fw-boldest"><div id="th-suplotnum-sizer"></div><div class="thhead ">Sup. Lot No.</div></th>
+                                    <th class="d-none none" id="th-glocation" data-grid-visible="false" style="display: none;"><div id="th-glocation-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-glocationid" data-grid-visible="false" style="display: none;"><div id="th-glocationid-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-gsublocation" data-grid-visible="false" style="display: none;"><div id="th-gsublocation-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-gsublocationid" data-grid-visible="false" style="display: none;"><div id="th-gsublocationid-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-noofbags" data-grid-visible="false" style="display: none;"><div id="th-noofbags-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-bagwt" data-grid-visible="false" style="display: none;"><div id="th-bagwt-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-bagnetwt" style="width:71px;" class="fw-boldest"><div id="th-bagnetwt-sizer"></div><div class="thhead ">Net Weight</div></th>
+                                    <th id="th-freeqty" style="width:80px;" class="fw-boldest"><div id="th-freeqty-sizer"></div><div class="thhead ">Lot Qty [Kgs]</div></th>
+                                    <th id="th-resrvdqty" style="width:78px;" class="fw-boldest"><div id="th-resrvdqty-sizer"></div><div class="thhead ">Reserved Qty [Kgs]</div></th>
+                                    <th id="th-weightperkg" style="width:46px;" class="fw-boldest"><div id="th-weightperkg-sizer"></div><div class="thhead ">Wt./Bag-[Kgs]</div></th>
+                                    <th id="th-lfreeqty" style="width:78px;" class="fw-boldest"><div id="th-lfreeqty-sizer"></div><div class="thhead ">Free Qty [Kgs]</div></th>
+                                    <th id="th-lfreeqtybags" style="width: 63px; display: none;" class="fw-boldest none" data-grid-visible="false"><div id="th-lfreeqtybags-sizer"></div><div class="thhead ">Free Qty [Bags]</div></th>
+                                    <th id="th-bhscheduleby" style="width: 71px; display: none;" class="fw-boldest none" data-grid-visible="false"><div id="th-bhscheduleby-sizer"></div><div class="thhead required ">Allocation By [Bags/Kgs]</div></th>
+                                    <th id="th-requiredqty" style="width:80px;" class="fw-boldest"><div id="th-requiredqty-sizer"></div><div class="thhead ">Required Qty [ Kgs]</div></th>
+                                    <th class="d-none" id="th-snoofbags" style="width: 55px;"><div id="th-snoofbags-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-temp_snoofbags" style="width:150px;" class="fw-boldest"><div id="th-temp_snoofbags-sizer"></div><div class="thhead ">No. of Bags [Alloc.]</div></th>
+                                    <th id="th-snoofqty" style="width:87px;" class="fw-boldest"><div id="th-snoofqty-sizer"></div><div class="thhead ">No. of Kgs. [Alloc.]</div></th>
+                                    <th class="d-none none" id="th-sampleqty" data-grid-visible="false" style="display: none;"><div id="th-sampleqty-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-alloctdqty" style="width:98px;" class="fw-boldest"><div id="th-alloctdqty-sizer"></div><div class="thhead required ">Allocated Qty [Kgs]</div></th>
+                                    <th class="d-none none" id="th-poqty" data-grid-visible="false" style="display: none;"><div id="th-poqty-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-grnqty" style="width:127px;" class="fw-boldest"><div id="th-grnqty-sizer"></div><div class="thhead ">grnqty</div></th>
+                                    <th class="d-none none" id="th-grnqtyval" data-grid-visible="false" style="display: none;"><div id="th-grnqtyval-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-bpoqty" data-grid-visible="false" style="display: none;"><div id="th-bpoqty-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-temptransqty" data-grid-visible="false" style="display: none;"><div id="th-temptransqty-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-costrate" style="width:88px;" class="fw-boldest"><div id="th-costrate-sizer"></div><div class="thhead ">Rate</div></th>
+                                    <th id="th-amount" style="width:127px;" class="fw-boldest"><div id="th-amount-sizer"></div><div class="thhead ">Amount</div></th>
+                                    <th id="th-remrks" style="width:400px;" class="fw-boldest"><div id="th-remrks-sizer"></div><div class="thhead ">Spcl. Instruction / Remarks</div></th>
+                                    <th id="th-mixid" style="width: 12px; display: none;" class="fw-boldest none" data-grid-visible="false"><div id="th-mixid-sizer"></div><div class="thhead ">Combination of Item Code,Box / Lot No.</div></th>
+                                    <th class="d-none none" id="th-savectrl" data-grid-visible="false" style="display: none;"><div id="th-savectrl-sizer"></div><div class="thhead"></div></th>
+                                    <th class="d-none none" id="th-teatransferreq" data-grid-visible="false" style="display: none;"><div id="th-teatransferreq-sizer"></div><div class="thhead"></div></th>
                                 </tr>
                             </thead>
                             <tbody id="blend_details_body">
                                 <!-- Populated by JS -->
                             </tbody>
                         </table>
-                        <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
-                            <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
-                                onclick="addBlendRow()">
-                                <span class="material-icons" style="font-size: 16px;">add</span> New
-                            </button>
-                        </div>
+                    </div>
+                    <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
+                        <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                            onclick="addBlendRow()">
+                            <span class="material-icons" style="font-size: 16px;">add</span> New
+                        </button>
                     </div>
                 </div>
 
                 <!-- Tab 2: Contract Detail -->
                 <div id="contract_detail" class="ax-tab-content">
-                    <div class="ax-table-container">
-                        <table>
+                    <div id="colScroll3" class="griddivColumn wrapperForGridData3 gridFixedHeader" style="overflow: auto;">
+                        <div class="thhead"></div>
+                        <table class="customSetupTableMN gridHeader g-1 table table-striped table-bordered mt-1 mb-0 border-gray-300 table-sm" id="gridHd3" style="width: 2491px;">
                             <thead>
-                                <tr>
-                                    <th style="width: 50px; text-align:center;"></th>
-                                    <th style="width: 50px; text-align:center;">S.No</th>
-                                    <th>Production Lot No</th>
-                                    <th>Del Sch No/IP Req No</th>
-                                    <th>Contract No</th>
-                                    <th>Contract Date</th>
-                                    <th>Ref No</th>
-                                    <th style="width: 40px;"></th>
+                                <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-300">
+                                    <th id="uniqueEditDeleteAct3" class="text-center fw-boldest w-20px">
+                                        <div class="form-check form-check-sm form-check-custom ms-2 py-0">
+                                            <input type="checkbox" name="chkallgridrow3" class="form-check-input fgHdrChk gridHdrChk opacity-100" id="chkallgridrow3" onclick="javascript:CheckAllGridRow(this, 3);" disabled="">
+                                        </div>
+                                    </th>
+                                    <th id="uniqueThHead3" class="thhead fw-boldest" style="width: 40px;"><div id="uniqueThHead3-sizer"></div><div class="thhead">S.No</div></th>
+                                    <th style="display: none;" id="th-axp_recid3" class="none" data-grid-visible="false"><div id="th-axp_recid3-sizer"></div><div class="thhead"></div></th>
+                                    <th id="th-plotno" style="width:280px;" class="fw-boldest"><div id="th-plotno-sizer"></div><div class="thhead ">Production Lot No</div></th>
+                                    <th id="th-delschno" style="width:269px;" class="fw-boldest"><div id="th-delschno-sizer"></div><div class="thhead ">Del Sch No/IP Req No</div></th>
+                                    <th id="th-sono" style="width:197px;" class="fw-boldest"><div id="th-sono-sizer"></div><div class="thhead ">Contract No</div></th>
+                                    <th id="th-sodate" style="width:128px;" class="fw-boldest"><div id="th-sodate-sizer"></div><div class="thhead ">Contract Date</div></th>
+                                    <th id="th-refno" style="width:232px;" class="fw-boldest"><div id="th-refno-sizer"></div><div class="thhead ">Ref No</div></th>
+                                    <th id="th-pitemcode" style="width:261px;" class="fw-boldest"><div id="th-pitemcode-sizer"></div><div class="thhead ">Product Code</div></th>
+                                    <th id="th-pitemname" style="width:237px;" class="fw-boldest"><div id="th-pitemname-sizer"></div><div class="thhead ">Product Name</div></th>
+                                    <th id="th-cstandard" style="width:143px;" class="fw-boldest"><div id="th-cstandard-sizer"></div><div class="thhead ">Product Standard</div></th>
+                                    <th id="th-pricingunit" style="width:94px;" class="fw-boldest"><div id="th-pricingunit-sizer"></div><div class="thhead ">Pricing Unit</div></th>
+                                    <th id="th-priceunit" style="width:133px;" class="fw-boldest"><div id="th-priceunit-sizer"></div><div class="thhead ">Price/Unit</div></th>
+                                    <th id="th-pqty" style="width:128px;" class="fw-boldest"><div id="th-pqty-sizer"></div><div class="thhead ">Order Qty</div></th>
+                                    <th id="th-pteaweight" style="width:128px;" class="fw-boldest"><div id="th-pteaweight-sizer"></div><div class="thhead ">Tea Weight</div></th>
+                                    <th id="th-dummy" style="width:150px;" class="fw-boldest"><div id="th-dummy-sizer"></div><div class="thhead ">&nbsp;</div></th>
                                 </tr>
                             </thead>
                             <tbody id="contract_details_body">
                                 <!-- Populated by JS -->
                             </tbody>
                         </table>
-                        <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
-                            <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
-                                onclick="addContractRow()">
-                                <span class="material-icons" style="font-size: 16px;">add</span> New
-                            </button>
-                        </div>
+                    </div>
+                    <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
+                        <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                            onclick="addContractRow()">
+                            <span class="material-icons" style="font-size: 16px;">add</span> New
+                        </button>
                     </div>
                 </div>
 
@@ -723,16 +783,19 @@
                 tr.innerHTML = `
                     <td style="text-align:center;"><input type="checkbox"></td>
                     <td style="text-align:center; color:var(--secondary);">${rowCount}</td>
-                    <td><input type="text" placeholder="Prod Lot No"></td>
-                    <td><input type="text" placeholder="Del Sch No"></td>
-                    <td><input type="text" placeholder="Contract No"></td>
-                    <td><input type="date" value="${today}"></td>
-                    <td><input type="text" placeholder="Ref No"></td>
-                    <td style="text-align:center;">
-                        <button style="background:none; border:none; color:#EF4444; cursor:pointer;" onclick="removeRow(this, 'contract_details_body')">
-                            <span class="material-icons" style="font-size:18px;">delete</span>
-                        </button>
-                    </td>
+                    <td><input type="text" placeholder="Production Lot No" maxlength="50"></td>
+                    <td><input type="text" placeholder="Del Sch No/IP Req No" maxlength="50"></td>
+                    <td><input type="text" placeholder="Contract No" maxlength="50"></td>
+                    <td><input type="date"></td>
+                    <td><input type="text" placeholder="Ref No" maxlength="50"></td>
+                    <td><input type="text" placeholder="Product Code" maxlength="100"></td>
+                    <td><input type="text" placeholder="Product Name" maxlength="200"></td>
+                    <td><input type="text" placeholder="Product Standard" maxlength="50"></td>
+                    <td><input type="text" placeholder="Pricing Unit" maxlength="50"></td>
+                    <td><input type="text" placeholder="Price/Unit" maxlength="15"></td>
+                    <td><input type="text" placeholder="Order Qty" maxlength="16" style="text-align: right;"></td>
+                    <td><input type="text" placeholder="Tea Weight" maxlength="16" style="text-align: right;"></td>
+                    <td><input type="text" placeholder=" " maxlength="10"></td>
                 `;
                 tbody.appendChild(tr);
             }

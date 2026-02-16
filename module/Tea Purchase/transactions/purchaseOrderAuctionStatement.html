@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order / Auction Statement</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- SCOPED VARIABLES & RESET --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F3F4F6;
+        }
+
+        .ax-custom-wrapper {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #64748B;
+            --bg-body: #F3F4F6;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --text-main: #111827;
+            --radius-lg: 16px;
+            --font-main: 'Inter', sans-serif;
+
+            font-family: var(--font-main) !important;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .ax-custom-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .ax-glass-card {
+            width: 100%;
+            max-width: 1400px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* --- HEADER --- */
+        .ax-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ax-page-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .ax-page-title p {
+            color: var(--secondary);
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+            margin-bottom: 0;
+        }
+
+        .ax-header-actions {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .ax-header-actions .ax-form-group {
+            margin: 0;
+        }
+
+        .ax-header-actions input {
+            width: 150px !important;
+            text-align: center;
+        }
+
+        .ax-header-actions .ax-btn {
+            margin-bottom: 0;
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* --- FORM --- */
+        .ax-form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ax-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ax-section-title .material-icons {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .ax-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.75rem;
+        }
+
+        .ax-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .ax-custom-wrapper label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* Required field indicator */
+        .required::after {
+            content: ' *';
+            color: #EF4444;
+            font-weight: 600;
+        }
+
+        .ax-custom-wrapper input,
+        .ax-custom-wrapper select,
+        .ax-custom-wrapper textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.85rem;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .ax-custom-wrapper input:read-only {
+            background-color: #FAFAFA;
+            color: #666;
+        }
+
+        .ax-custom-wrapper input:focus,
+        .ax-custom-wrapper select:focus,
+        .ax-custom-wrapper textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- TABS --- */
+        .ax-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .ax-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--secondary);
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+        }
+
+        .ax-tab:hover {
+            color: var(--primary);
+        }
+
+        .ax-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .ax-tab-content {
+            display: none;
+        }
+
+        .ax-tab-content.active {
+            display: block;
+        }
+
+        /* --- TABLE --- */
+        .ax-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .ax-custom-wrapper table {
+            width: 100%;
+            min-width: 1500px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .ax-custom-wrapper thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .ax-custom-wrapper th {
+            text-align: left;
+            padding: 0.6rem 0.75rem;
+            background: #F8FAFC;
+            font-weight: 600;
+            color: var(--secondary);
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            vertical-align: middle;
+            min-width: 80px;
+        }
+
+        .ax-custom-wrapper th:first-child {
+            text-align: center;
+            width: 50px;
+            min-width: 50px;
+        }
+
+        .ax-custom-wrapper th:nth-child(2) {
+            min-width: 50px;
+        }
+
+        .ax-custom-wrapper tbody tr {
+            border-bottom: 1px solid #F1F5F9;
+            transition: background-color 0.15s ease;
+        }
+
+        .ax-custom-wrapper tbody tr:hover {
+            background-color: #F8FAFC;
+        }
+
+        .ax-custom-wrapper td {
+            padding: 0.5rem 0.75rem;
+            border: none;
+            vertical-align: middle;
+            min-width: 80px;
+        }
+
+        .ax-custom-wrapper td:first-child {
+            text-align: center;
+            width: 50px;
+            min-width: 50px;
+        }
+
+        .ax-custom-wrapper td:nth-child(2) {
+            min-width: 50px;
+        }
+
+        .ax-custom-wrapper td input,
+        .ax-custom-wrapper td select {
+            width: 100%;
+            min-width: 70px;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.15s ease;
+            font-family: var(--font-main);
+        }
+
+        .ax-custom-wrapper td input::placeholder {
+            color: #CBD5E1;
+        }
+
+        .ax-custom-wrapper td input:hover,
+        .ax-custom-wrapper td select:hover {
+            background-color: #FFFFFF;
+        }
+
+        .ax-custom-wrapper td input:focus,
+        .ax-custom-wrapper td select:focus {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+            outline: none;
+        }
+
+        .ax-custom-wrapper td input:disabled,
+        .ax-custom-wrapper td select:disabled {
+            background-color: #F8FAFC;
+            color: #94A3B8;
+            cursor: not-allowed;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* --- FOOTER --- */
+        .ax-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #F1F5F9;
+        }
+
+        .ax-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            gap: 0.5rem;
+        }
+
+        .ax-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .ax-btn-primary {
+            background: #3B82F6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .ax-btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .ax-btn-white {
+            background: white;
+            border: 1.5px solid #3B82F6;
+            color: #3B82F6;
+        }
+
+        .ax-btn-white:hover {
+            background: #EFF6FF;
+            border-color: #2563EB;
+            color: #2563EB;
+        }
+
+        /* --- SUMMARY PANEL --- */
+        .summary-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .summary-overlay.active {
+            display: block;
+        }
+
+        .summary-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif !important;
+            color: #111827;
+        }
+
+        .summary-panel * {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .summary-panel.active {
+            transform: translateX(0);
+        }
+
+        .summary-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 2px solid #F1F5F9;
+            background: #F8FAFC;
+            font-family: 'Inter', sans-serif !important;
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
+
+        .summary-panel-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4F46E5;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .close-panel-btn {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            cursor: pointer;
+            color: #64748B;
+            padding: 0.6rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif !important;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .close-panel-btn .material-icons {
+            font-size: 20px;
+            color: inherit;
+            font-family: 'Material Icons' !important;
+            font-weight: normal;
+            font-style: normal;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+        }
+
+        .close-panel-btn:hover {
+            color: #111827;
+            background: #F3F4F6;
+            border-color: #CBD5E1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-panel-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .close-panel-btn:focus {
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .summary-panel-content .ax-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .summary-panel-content label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #64748B;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .summary-panel-content input,
+        .summary-panel-content textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif !important;
+            color: #111827;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .summary-panel-content input:read-only {
+            background-color: #FAFAFA;
+            color: #666;
+        }
+
+        .summary-panel-content input:focus,
+        .summary-panel-content textarea:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .summary-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ax-custom-wrapper">
+        <div class="ax-glass-card">
+
+            <!-- HEADER -->
+            <div class="ax-header">
+                <div class="ax-page-title">
+                    <h1>Purchase Order / Auction Statement</h1>
+                </div>
+                <div class="ax-header-actions">
+                    <div class="ax-form-group">
+                        <label class="required">PO No.</label>
+                        <input type="text" id="poNo" value="Auto" readonly>
+                    </div>
+                    <button class="ax-btn" onclick="toggleSummaryPanel()" style="background: #3B82F6; color: white; padding: 0.6rem 1.2rem; border-radius: 4px;">
+                        <span class="material-icons" style="font-size: 1rem;">receipt_long</span>
+                        Summary
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="ax-form-section">
+                <!-- SECTION 1: General Information -->
+                <div class="ax-section-title"><span class="material-icons">domain</span> General Information</div>
+
+                <!-- Row 1: Purchase Type, PO Date, Sale Code, From Catalogue -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label class="required">Purchase Type</label>
+                        <select id="purchaseType">
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label class="required">PO Date</label>
+                        <input type="date" id="poDate" value="2026-02-13">
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Sale Code</label>
+                        <input type="text" id="saleCode" placeholder="">
+                    </div>
+                    <div class="ax-form-group">
+                        <label>From Catalogue File ?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="fromCatalogue">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Row 2: Supplier, Bill To, Sale Date -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label class="required">Supplier</label>
+                        <select id="supplier">
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label class="required">Bill To</label>
+                        <select id="billTo">
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Sale Date</label>
+                        <input type="date" id="saleDate">
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Currency</label>
+                        <select id="currency">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Delivery & Terms -->
+                <div class="ax-section-title"><span class="material-icons">local_shipping</span> Delivery & Terms</div>
+
+                <!-- Row 3: Release PO, Bill based on PO, Credit Days, Item Code -->
+                <div class="ax-grid-4">
+                    <div class="ax-form-group">
+                        <label>Release PO</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="releasePo">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Bill based on PO Direct?</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="billBasedOnPo">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Credit Days</label>
+                        <input type="number" id="creditDays">
+                    </div>
+                    <div class="ax-form-group">
+                        <label>Item Code</label>
+                        <select id="itemCode">
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="ax-tabs">
+                <button class="ax-tab active" onclick="activateTab(0)">
+                    <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">edit</span>
+                    Item Particulars
+                </button>
+                <button class="ax-tab" onclick="activateTab(1)">
+                    <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">schedule</span>
+                    Payment Schedule
+                </button>
+            </div>
+
+            <!-- TAB 1: ITEM PARTICULARS -->
+            <div id="tab0" class="ax-tab-content active">
+                <div class="ax-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"><input type="checkbox"></th>
+                                <th>S.no</th>
+                                <th>Lot No</th>
+                                <th>Item Code</th>
+                                <th>Bags</th>
+                                <th>Bag Weight (Kgs)</th>
+                                <th>Sample (Kgs)</th>
+                                <th>Quantity</th>
+                                <th>Rate (Kgs)</th>
+                                <th>Value</th>
+                                <th>Catalogue Type</th>
+                                <th>ePlatform Charge per Kg</th>
+                                <th>ePlatform Charge Total</th>
+                                <th>Buyer</th>
+                                <th>Catalogue Garden</th>
+                                <th>Garden Name</th>
+                                <th>Grade</th>
+                                <th>Delivery</th>
+                                <th>Inv. No</th>
+                                <th>Serial / Box No</th>
+                                <th>Pay Mode</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><select><option></option></select></td>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="date"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><select><option></option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: #F8FAFC; padding: 0.75rem 1rem; border-top: 1px solid #E2E8F0;">
+                    <button class="ax-btn ax-btn-white" style="padding: 0.4rem 1rem; font-size: 0.85rem;" onclick="addItemRow()">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: PAYMENT SCHEDULE -->
+            <div id="tab1" class="ax-tab-content">
+                <div class="ax-form-section">
+                    <div class="ax-grid-3">
+                        <div class="ax-form-group">
+                            <label>Advance %</label>
+                            <input type="number" id="advancePercent" value="10.00">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Advance</label>
+                            <input type="number" id="advanceAmount">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Due On</label>
+                            <input type="date" id="advanceDueOn">
+                        </div>
+                    </div>
+
+                    <div class="ax-grid-3">
+                        <div class="ax-form-group">
+                            <label>Credit Days</label>
+                            <input type="number" id="creditDays2">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Urgent Payment</label>
+                            <input type="number" id="urgentPayment">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Due On</label>
+                            <input type="date" id="urgentDueOn">
+                        </div>
+                    </div>
+
+                    <div class="ax-grid-3">
+                        <div class="ax-form-group">
+                            <label>Credit Days</label>
+                            <input type="number" id="creditDays3">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Balance</label>
+                            <input type="number" id="balance">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Due On</label>
+                            <input type="date" id="balanceDueOn" value="2026-02-13">
+                        </div>
+                    </div>
+
+                    <div class="ax-grid-2">
+                        <div class="ax-form-group">
+                            <label>Credit Days</label>
+                            <input type="number" id="creditDays4">
+                        </div>
+                        <div class="ax-form-group">
+                            <label>Board Fee</label>
+                            <input type="number" id="boardFee">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="ax-footer">
+                <button class="ax-btn ax-btn-white" onclick="handleNew()">
+                    <span class="material-icons" style="font-size: 1rem;">add</span>
+                    New
+                </button>
+                <button class="ax-btn ax-btn-primary" onclick="handleSubmit()">
+                    <span class="material-icons" style="font-size: 1rem;">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Summary Overlay -->
+    <div class="summary-overlay" id="summaryOverlay" onclick="toggleSummaryPanel()"></div>
+
+    <!-- Summary Panel -->
+    <div class="summary-panel" id="summaryPanel">
+        <div class="summary-panel-header">
+            <h2>Summary</h2>
+            <button class="close-panel-btn" onclick="toggleSummaryPanel()" title="Close Summary Panel" aria-label="Close Summary Panel">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="summary-panel-content">
+            <div class="ax-form-section">
+                <div class="ax-form-group">
+                    <label>Total Amount</label>
+                    <input type="number" id="totalAmount" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>Total Tax Amount</label>
+                    <input type="number" id="totalTaxAmount" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>Total Amount with Tax</label>
+                    <input type="number" id="totalWithTax" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>ePlatform Total Charge.</label>
+                    <input type="number" id="totalCharge" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>No Of Lines</label>
+                    <input type="number" id="noOfLines" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>Total Weight (Kgs.)</label>
+                    <input type="number" id="totalWeight" readonly>
+                </div>
+                <div class="ax-form-group">
+                    <label>Remarks</label>
+                    <textarea id="remarks" style="min-height: 120px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function activateTab(tabIndex) {
+            // Hide all tabs
+            document.querySelectorAll('.ax-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.ax-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(`tab${tabIndex}`).classList.add('active');
+            document.querySelectorAll('.ax-tab')[tabIndex].classList.add('active');
+        }
+
+        function toggleSummaryPanel() {
+            document.getElementById('summaryPanel').classList.toggle('active');
+            document.getElementById('summaryOverlay').classList.toggle('active');
+        }
+
+        function handleNew() {
+            document.getElementById('purchaseType').value = '';
+            document.getElementById('poNo').value = 'Auto';
+            document.getElementById('poDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('saleCode').value = '';
+            document.getElementById('saleDate').value = '';
+            document.getElementById('supplier').value = '';
+            document.getElementById('billTo').value = '';
+            document.getElementById('currency').value = '';
+            document.getElementById('enterLot').value = '';
+            document.getElementById('creditDays').value = '';
+            document.getElementById('itemCode').value = '';
+            document.getElementById('remarks').value = '';
+            console.log('New record initialized');
+        }
+
+        function handleSubmit() {
+            const purchaseType = document.getElementById('purchaseType').value;
+            const poNo = document.getElementById('poNo').value;
+            const supplier = document.getElementById('supplier').value;
+
+            if (!purchaseType || !supplier) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            console.log('Form submitted', {
+                purchaseType,
+                poNo,
+                supplier
+            });
+
+            alert('Purchase Order saved successfully!');
+        }
+
+        function addItemRow() {
+            const tbody = document.getElementById('itemsTableBody');
+            const newRow = tbody.insertRow();
+            const rowNum = tbody.rows.length;
+            
+            newRow.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>${rowNum}</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><select><option></option></select></td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="date"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><select><option></option></select></td>
+            `;
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded');
+        });
+    </script>
+</body>
+
+</html>
