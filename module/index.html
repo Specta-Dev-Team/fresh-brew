@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Brew - Module Index</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../template/css/design-system.css">
+    <link rel="stylesheet" href="../template/css/components.css">
+
+    <style>
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .module-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.15);
+            border-color: var(--primary);
+        }
+
+        .module-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4F46E5, #6366F1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .module-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .module-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .module-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .module-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .module-links a:hover {
+            color: var(--primary);
+            background: #F8FAFC;
+            transform: translateX(4px);
+        }
+
+        .module-links .material-icons {
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #F1F5F9;
+            color: var(--secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper">
+        <div class="fb-glass-card">
+
+            <!-- HERO SECTION -->
+            <div class="hero-section">
+                <h1>🍃 Fresh Brew</h1>
+                <p>Tea Management System - Module Index</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Main Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Total Screens</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Master Screens</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE GRID -->
+            <div class="module-grid">
+
+                <!-- TEA PURCHASE MODULE -->
+                <div class="module-card">
+                    <div class="module-card-header">
+                        <div class="module-icon">
+                            <span class="material-icons" style="font-size: 1.8rem;">shopping_cart</span>
+                        </div>
+                        <div>
+                            <h3 class="module-title">Tea Purchase</h3>
+                            <span class="category-badge">PROCUREMENT</span>
+                        </div>
+                    </div>
+                    <ul class="module-links">
+                        <li>
+                            <a href="Tea Purchase/Collection Plan.html">
+                                <span class="material-icons">event_note</span>
+                                Collection Plan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Tea Purchase/Goods Received Note.html">
+                                <span class="material-icons">receipt_long</span>
+                                Goods Received Note
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Tea Purchase/transactions/purchaseOrderAuctionStatement.html">
+                                <span class="material-icons">gavel</span>
+                                Purchase Order (Auction)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- BLENDING MODULE -->
+                <div class="module-card">
+                    <div class="module-card-header">
+                        <div class="module-icon">
+                            <span class="material-icons" style="font-size: 1.8rem;">blender</span>
+                        </div>
+                        <div>
+                            <h3 class="module-title">Blending</h3>
+                            <span class="category-badge">PRODUCTION</span>
+                        </div>
+                    </div>
+                    <ul class="module-links">
+                        <li>
+                            <a href="blending/Blend Sheet.html">
+                                <span class="material-icons">description</span>
+                                Blend Sheet
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- GLOBAL SETUP - PURCHASE MASTER -->
+                <div class="module-card">
+                    <div class="module-card-header">
+                        <div class="module-icon">
+                            <span class="material-icons" style="font-size: 1.8rem;">inventory</span>
+                        </div>
+                        <div>
+                            <h3 class="module-title">Purchase Masters</h3>
+                            <span class="category-badge">SETUP</span>
+                        </div>
+                    </div>
+                    <ul class="module-links">
+                        <li>
+                            <a href="Global setup/purchase master/groupMaster.html">
+                                <span class="material-icons">group_work</span>
+                                Group Master
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Global setup/purchase master/Payment Term.html">
+                                <span class="material-icons">payment</span>
+                                Payment Term
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Global setup/purchase master/Shipment Term.html">
+                                <span class="material-icons">local_shipping</span>
+                                Shipment Term
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Global setup/purchase master/Vendor.html">
+                                <span class="material-icons">business</span>
+                                Vendor Management
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- GLOBAL SETUP - SALES MASTERS -->
+                <div class="module-card">
+                    <div class="module-card-header">
+                        <div class="module-icon">
+                            <span class="material-icons" style="font-size: 1.8rem;">point_of_sale</span>
+                        </div>
+                        <div>
+                            <h3 class="module-title">Sales Masters</h3>
+                            <span class="category-badge">SETUP</span>
+                        </div>
+                    </div>
+                    <ul class="module-links">
+                        <li>
+                            <a href="Global setup/sales masters/sales type.html">
+                                <span class="material-icons">sell</span>
+                                Sales Type
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Global setup/sales masters/container type.html">
+                                <span class="material-icons">inventory_2</span>
+                                Container Type
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- TEMPLATE & DESIGN SYSTEM -->
+                <div class="module-card" style="border: 2px solid var(--primary);">
+                    <div class="module-card-header">
+                        <div class="module-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                            <span class="material-icons" style="font-size: 1.8rem;">palette</span>
+                        </div>
+                        <div>
+                            <h3 class="module-title">Design System</h3>
+                            <span class="category-badge" style="background: var(--primary); color: white;">TEMPLATE</span>
+                        </div>
+                    </div>
+                    <ul class="module-links">
+                        <li>
+                            <a href="../template/design-guide.html">
+                                <span class="material-icons">dashboard</span>
+                                Design Guide
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../template/snippets/components.html">
+                                <span class="material-icons">code</span>
+                                Component Snippets
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../template/template-base.html">
+                                <span class="material-icons">article</span>
+                                Base Template
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../template/README.md" target="_blank">
+                                <span class="material-icons">description</span>
+                                Documentation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- FOOTER INFO -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #E2E8F0; text-align: center;">
+                <p style="color: var(--secondary); font-size: 0.9rem;">
+                    <span class="material-icons" style="vertical-align: middle; font-size: 1rem;">info</span>
+                    Built with Fresh Brew Design System | Inter Font & Material Icons
+                </p>
+                <p style="color: var(--secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                    All screens use consistent styling with the fb- component library
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

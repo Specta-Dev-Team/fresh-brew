@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Brew - Tea Management System</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="template/css/design-system.css">
+    <link rel="stylesheet" href="template/css/components.css">
+
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+            border-radius: 16px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .cta-card {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cta-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+            border-color: var(--primary);
+        }
+
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4F46E5, #6366F1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .cta-card:hover .cta-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .cta-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1rem;
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cta-card:hover .cta-button {
+            background: var(--primary-hover);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #F8FAFC;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10B981, #059669);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            margin: 0 0 0.5rem;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .feature-text p {
+            margin: 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #F8FAFC;
+            border-radius: 12px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .emoji {
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper">
+        <div class="fb-glass-card">
+
+            <!-- HERO SECTION -->
+            <div class="hero">
+                <h1>
+                    <span class="emoji">🍃</span>
+                    Fresh Brew
+                </h1>
+                <p>
+                    Modern Tea Management System<br>
+                    Built with a consistent design system and reusable components
+                </p>
+            </div>
+
+            <!-- MAIN CTAs -->
+            <div class="cta-grid">
+                <a href="module/index.html" class="cta-card">
+                    <div class="cta-icon">
+                        <span class="material-icons" style="font-size: 2.5rem;">apps</span>
+                    </div>
+                    <div class="cta-title">Application Modules</div>
+                    <div class="cta-description">
+                        Access all business modules including Tea Purchase, Blending, and Master Data screens
+                    </div>
+                    <div class="cta-button">
+                        Explore Modules
+                        <span class="material-icons">arrow_forward</span>
+                    </div>
+                </a>
+
+                <a href="template/design-guide.html" class="cta-card">
+                    <div class="cta-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                        <span class="material-icons" style="font-size: 2.5rem;">palette</span>
+                    </div>
+                    <div class="cta-title">Design System</div>
+                    <div class="cta-description">
+                        Complete design guide with UI components, patterns, and code snippets for developers
+                    </div>
+                    <div class="cta-button" style="background: #10B981;">
+                        View Design Guide
+                        <span class="material-icons">arrow_forward</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- FEATURES -->
+            <div style="margin: 4rem 0 2rem;">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">design_services</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Consistent Design</h4>
+                            <p>All screens follow the same design language and component library</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">speed</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Fast Development</h4>
+                            <p>Reusable components accelerate screen development</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">devices</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Responsive Layout</h4>
+                            <p>Works seamlessly across desktop, tablet, and mobile</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">integration_instructions</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Easy Integration</h4>
+                            <p>Simple CSS classes and HTML structure for quick implementation</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">check_circle</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Form Validation</h4>
+                            <p>Built-in validation styles and required field indicators</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="material-icons">description</span>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Documentation</h4>
+                            <p>Comprehensive docs with examples and code snippets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TECH STACK -->
+            <div style="margin-top: 4rem;">
+                <h3 style="text-align: center; color: var(--secondary); margin-bottom: 1.5rem;">Built With</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <span class="material-icons">html</span>
+                        HTML5
+                    </div>
+                    <div class="tech-item">
+                        <span class="material-icons">css</span>
+                        CSS3
+                    </div>
+                    <div class="tech-item">
+                        <span class="material-icons">javascript</span>
+                        JavaScript
+                    </div>
+                    <div class="tech-item">
+                        <span class="material-icons">font_download</span>
+                        Inter Font
+                    </div>
+                    <div class="tech-item">
+                        <span class="material-icons">extension</span>
+                        Material Icons
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK LINKS -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #E2E8F0;">
+                <h3 style="text-align: center; color: var(--secondary); margin-bottom: 1.5rem;">Quick Links</h3>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <a href="template/README.md" target="_blank" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="material-icons">menu_book</span>
+                        Documentation
+                    </a>
+                    <a href="template/snippets/components.html" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="material-icons">code</span>
+                        Code Snippets
+                    </a>
+                    <a href="template/template-base.html" style="color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="material-icons">article</span>
+                        Base Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #E2E8F0; text-align: center;">
+                <p style="color: var(--secondary); font-size: 0.9rem;">
+                    Fresh Brew Design System | Tea Management Platform
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
