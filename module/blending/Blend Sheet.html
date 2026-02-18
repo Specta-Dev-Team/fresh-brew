@@ -10,105 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../template/css/components.css">
+
     <style>
-        /* --- SCOPED VARIABLES & RESET --- */
-        body {
-            margin: 0;
-            padding: 0;
-            background: #F3F4F6;
-        }
+        /* --- CUSTOM STYLES FOR BLEND SHEET --- */
 
-        .ax-custom-wrapper {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --secondary: #64748B;
-            --bg-body: #F3F4F6;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-            --text-main: #111827;
-            --radius-lg: 16px;
-            --font-main: 'Inter', sans-serif;
-
-            font-family: var(--font-main) !important;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-
-        .ax-custom-wrapper * {
-            box-sizing: border-box;
-        }
-
-        .ax-glass-card {
-            width: 100%;
-            max-width: 1400px;
-            background: var(--glass-bg);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--card-shadow);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        /* --- HEADER --- */
-        .ax-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #F1F5F9;
-            padding-bottom: 1rem;
-        }
-
-        .ax-page-title h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--primary);
-        }
-
-        .ax-page-title p {
-            color: var(--secondary);
-            font-size: 0.75rem;
-            margin-top: 0.15rem;
-            margin-bottom: 0;
-        }
-
-        /* --- FORM --- */
-        .ax-form-section {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .ax-section-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-top: 0.5rem;
-        }
-
-        .ax-split-layout {
+        .fb-split-layout {
             display: flex;
             gap: 1.5rem;
         }
 
-        .ax-left-panel {
+        .fb-left-panel {
             flex: 3;
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
         }
 
-        .ax-right-panel {
+        .fb-right-panel {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -117,461 +38,47 @@
             padding-left: 1.5rem;
         }
 
-        .ax-grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .ax-custom-wrapper label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--secondary);
-        }
-
-        /* Required field indicator */
-        .required::after {
-            content: ' *';
-            color: #EF4444;
-            font-weight: 600;
-        }
-
-        .ax-custom-wrapper input,
-        .ax-custom-wrapper select,
-        .ax-custom-wrapper textarea {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border-radius: 4px;
-            border: 1px solid #E2E8F0;
-            background: #FFFFFF;
-            font-size: 0.85rem;
-            font-family: var(--font-main);
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .ax-custom-wrapper input:read-only {
-            background-color: #FAFAFA;
-            color: #666;
-        }
-
-        .ax-custom-wrapper input:focus,
-        .ax-custom-wrapper select:focus,
-        .ax-custom-wrapper textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        /* Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #CBD5E1;
-            transition: 0.3s;
-            border-radius: 20px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        input:checked+.toggle-slider {
-            background-color: var(--primary);
-        }
-
-        input:checked+.toggle-slider:before {
-            transform: translateX(20px);
-        }
-
-        .toggle-label-container {
+        .fb-toggle-label-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 0.5rem;
         }
 
-        /* --- TABS --- */
-        .ax-tabs {
-            display: flex;
-            gap: 1.5rem;
-            border-bottom: 2px solid #E2E8F0;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        .ax-tab {
-            padding: 0.5rem 0.5rem;
-            border: none;
-            background: transparent;
-            color: var(--secondary);
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            font-family: var(--font-main);
-            font-size: 0.9rem;
-            margin-bottom: -2px;
-        }
-
-        .ax-tab:hover {
-            color: var(--primary);
-        }
-
-        .ax-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .ax-tab-content {
-            display: none;
-        }
-
-        .ax-tab-content.active {
-            display: block;
-        }
-
-        /* --- TABLE --- */
-        .ax-table-container {
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            overflow: hidden;
-            overflow-x: auto;
-        }
-
-        .ax-custom-wrapper table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            min-width: 1200px;
-            /* Increased to prevent overlap */
-        }
-
-        .ax-custom-wrapper th {
-            text-align: left;
-            padding: 0.6rem 0.75rem;
-            background: #F8FAFC;
-            font-weight: 600;
-            color: var(--secondary);
-            border-bottom: 1px solid #E2E8F0;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
-        .ax-custom-wrapper td {
-            padding: 0.4rem 0.6rem;
-            border-bottom: 1px solid #F1F5F9;
-        }
-
-        .ax-custom-wrapper td input,
-        .ax-custom-wrapper td select {
-            border: 1px solid transparent;
-            background: transparent;
-            padding: 0.4rem;
-            font-size: 0.85rem;
-        }
-
-        .ax-custom-wrapper td input:focus,
-        .ax-custom-wrapper td select:focus {
-            background: white;
-            border-color: var(--primary);
-        }
-
-        /* --- FOOTER --- */
-        .ax-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid #F1F5F9;
-        }
-
-        .ax-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            gap: 0.4rem;
-            transition: all 0.2s;
-            font-size: 0.85rem;
-        }
-
-        .ax-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .ax-btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
-        }
-
-        .ax-btn-primary:hover {
-            background: var(--primary-hover);
-        }
-
-        .ax-btn-secondary {
-            background: #6D28D9;
-            /* Darker Purple for Submit */
-            color: white;
-        }
-
-        .ax-btn-secondary:hover {
-            background: #5B21B6;
-        }
-
-        .ax-btn-white {
-            background: white;
-            border: 1px solid #E2E8F0;
-            color: var(--text-main);
-        }
-
-        .ax-btn-white:hover {
-            background: #F8FAFC;
-            border-color: #CBD5E1;
-        }
-
-        .text-right {
-            text-align: right;
+        /* Custom table styling for large blend sheet tables */
+        .fb-table-container table {
+            min-width: 2800px;
         }
 
         .mt-4 {
             margin-top: 1.5rem;
-        }
-
-        /* --- SUMMARY PANEL --- */
-        .summary-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 999;
-        }
-
-        .summary-overlay.active {
-            display: block;
-        }
-
-        .summary-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 450px;
-            height: 100vh;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            font-family: 'Inter', sans-serif !important;
-            color: #111827;
-        }
-
-        .summary-panel * {
-            font-family: 'Inter', sans-serif !important;
-        }
-
-        .summary-panel.active {
-            transform: translateX(0);
-        }
-
-        .summary-panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem;
-            border-bottom: 2px solid #F1F5F9;
-            background: #F8FAFC;
-            font-family: 'Inter', sans-serif !important;
-            position: sticky;
-            top: 0;
-            z-index: 11;
-        }
-
-        .summary-panel-header h2 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'Inter', sans-serif !important;
-        }
-
-        .close-panel-btn {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            cursor: pointer;
-            color: #64748B;
-            padding: 0.6rem;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif !important;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            flex-shrink: 0;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-
-        .close-panel-btn .material-icons {
-            font-size: 20px;
-            color: inherit;
-            font-family: 'Material Icons' !important;
-            font-weight: normal;
-            font-style: normal;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-        }
-
-        .close-panel-btn:hover {
-            color: #111827;
-            background: #F3F4F6;
-            border-color: #CBD5E1;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .close-panel-btn:active {
-            transform: scale(0.95);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-
-        .close-panel-btn:focus {
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary-panel-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            font-family: 'Inter', sans-serif !important;
-        }
-
-        .summary-panel-content .ax-form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .summary-panel-content label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #64748B;
-            font-family: 'Inter', sans-serif !important;
-        }
-
-        .summary-panel-content input,
-        .summary-panel-content textarea {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border-radius: 4px;
-            border: 1px solid #E2E8F0;
-            background: #FFFFFF;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif !important;
-            color: #111827;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .summary-panel-content input:read-only {
-            background-color: #FAFAFA;
-            color: #666;
-        }
-
-        .summary-panel-content input:focus,
-        .summary-panel-content textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .summary-panel {
-                width: 100%;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="ax-custom-wrapper">
-        <div class="ax-glass-card">
+    <div class="fb-wrapper">
+        <div class="fb-glass-card">
 
             <!-- HEADER -->
-            <div class="ax-header">
-                <div class="ax-page-title">
-                    <button class="ax-btn ax-btn-white"
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <button class="fb-btn fb-btn-white"
                         style="border:none; padding:0; margin-right: 0.5rem; background: transparent;">
                         <span class="material-icons" style="color: var(--secondary);">arrow_back</span>
                     </button>
                     <h1 style="display: inline-block; vertical-align: middle;">Blend Sheet</h1>
                 </div>
-                <div class="ax-header-actions">
-                    <div class="ax-form-group" style="flex-direction: row; align-items: center; gap: 0.5rem;">
-                        <button class="ax-btn ax-btn-white" onclick="toggleSummaryPanel()" style="background: var(--primary); color: white; padding: 0.6rem 1.2rem; border-radius: 4px;">
-                            <span class="material-icons" style="font-size: 18px; margin-right: 0.4rem;">assessment</span> Summary
+                <div class="fb-header-actions">
+                    <div class="fb-form-group" style="flex-direction: row; align-items: center; gap: 0.5rem;">
+                        <button class="fb-btn fb-btn-primary" onclick="toggleSummaryPanel()">
+                            <span class="material-icons" style="font-size: 18px;">assessment</span> Summary
                         </button>
-                        <button class="ax-btn ax-btn-white">
+                        <button class="fb-btn fb-btn-white">
                             <span class="material-icons" style="font-size: 18px;">search</span>
                         </button>
-                        <button class="ax-btn ax-btn-white">
+                        <button class="fb-btn fb-btn-white">
                             <span class="material-icons" style="font-size: 18px;">menu</span>
                         </button>
                     </div>
@@ -579,53 +86,53 @@
             </div>
 
             <!-- MAIN FORM SECTION -->
-            <div class="ax-split-layout">
+            <div class="fb-split-layout">
                 <!-- Left Panel: Main Inputs -->
-                <div class="ax-left-panel">
+                <div class="fb-left-panel">
                     <!-- Row 1 -->
-                    <div class="ax-grid-3">
-                        <div class="ax-form-group">
+                    <div class="fb-grid-3">
+                        <div class="fb-form-group">
                             <label class="required">Company</label>
                             <select id="company">
                                 <option value="Vintage Teas Ceylon (Pvt) Ltd" selected>Vintage Teas Ceylon (Pvt) Ltd
                                 </option>
                             </select>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Blend No.</label>
                             <input type="text" id="blend_no" placeholder="Auto" readonly>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Blend Date</label>
                             <input type="date" id="blend_date">
                         </div>
                     </div>
 
                     <!-- Row 2 -->
-                    <div class="ax-grid-2">
-                        <div class="ax-form-group">
+                    <div class="fb-grid-2">
+                        <div class="fb-form-group">
                             <label class="required">Blend Item Code</label>
                             <select id="blend_item_code">
                                 <option value="">Select an option</option>
                                 <option value="ITEM-001">ITEM-001 / Tea Blend</option>
                             </select>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Prod. Ord. Qty.</label>
                             <input type="number" id="prod_ord_qty" placeholder="0.00">
                         </div>
                     </div>
 
                     <!-- Row 3 -->
-                    <div class="ax-grid-2">
-                        <div class="ax-form-group">
+                    <div class="fb-grid-2">
+                        <div class="fb-form-group">
                             <label class="required">Standard</label>
                             <select id="standard">
                                 <option value="">Select an option</option>
                                 <option value="STD-A">Standard A</option>
                             </select>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Grade</label>
                             <select id="grade">
                                 <option value="">Select an option</option>
@@ -636,34 +143,34 @@
                     </div>
 
                     <!-- Row 4 -->
-                    <div class="ax-grid-3">
-                        <div class="ax-form-group">
+                    <div class="fb-grid-3">
+                        <div class="fb-form-group">
                             <label>Total Blend Sheet Qty.</label>
                             <input type="number" id="total_blend_qty" placeholder="0.00" readonly>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Total Allocated Qty.</label>
                             <input type="number" id="total_allocated_qty" placeholder="0.00" readonly>
                         </div>
-                        <div class="ax-form-group">
+                        <div class="fb-form-group">
                             <label>Blend Avg. Price</label>
                             <input type="number" id="avg_price" placeholder="0.00" readonly>
                         </div>
                     </div>
 
                     <!-- Row 5: Box No -->
-                    <div class="ax-grid-3" style="align-items: flex-end;">
-                        <div class="ax-form-group" style="grid-column: span 2;">
+                    <div class="fb-grid-3" style="align-items: flex-end;">
+                        <div class="fb-form-group" style="grid-column: span 2;">
                             <label>Box No [Fill]</label>
                             <input type="text" id="box_no_fill">
                         </div>
-                        <div class="ax-form-group">
-                            <button class="ax-btn ax-btn-white" style="justify-content: center;">Fill Lot/Box</button>
+                        <div class="fb-form-group">
+                            <button class="fb-btn fb-btn-white" style="justify-content: center;">Fill Lot/Box</button>
                         </div>
                     </div>
 
                     <!-- Row 6: Packing Instruction -->
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Packing Instruction</label>
                         <textarea id="packing_instruction" rows="3"
                             placeholder="Enter packing instructions..."></textarea>
@@ -671,53 +178,53 @@
                 </div>
 
                 <!-- Right Panel: Side Status & Toggles -->
-                <div class="ax-right-panel">
+                <div class="fb-right-panel">
 
                     <!-- Toggles -->
-                    <div class="toggle-label-container">
+                    <div class="fb-toggle-label-container">
                         <label style="font-weight: 600; font-size: 0.85rem;">Approval</label>
-                        <label class="toggle-switch">
+                        <label class="fb-toggle-switch">
                             <input type="checkbox" id="toggle_approval">
-                            <span class="toggle-slider"></span>
+                            <span class="fb-toggle-slider"></span>
                         </label>
                     </div>
 
-                    <div class="toggle-label-container">
+                    <div class="fb-toggle-label-container">
                         <label style="font-weight: 600; font-size: 0.85rem;">Freeze Blend</label>
-                        <label class="toggle-switch">
+                        <label class="fb-toggle-switch">
                             <input type="checkbox" id="toggle_freeze">
-                            <span class="toggle-slider"></span>
+                            <span class="fb-toggle-slider"></span>
                         </label>
                     </div>
 
-                    <div class="toggle-label-container">
+                    <div class="fb-toggle-label-container">
                         <label style="font-weight: 600; font-size: 0.85rem;">Cancel</label>
-                        <label class="toggle-switch">
+                        <label class="fb-toggle-switch">
                             <input type="checkbox" id="toggle_cancel">
-                            <span class="toggle-slider"></span>
+                            <span class="fb-toggle-slider"></span>
                         </label>
                     </div>
 
                     <hr style="border: 0; border-top: 1px solid #E2E8F0; width: 100%; margin: 0.5rem 0;">
 
                     <!-- Fields -->
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Blend Status</label>
                         <input type="text" value="OPEN" readonly
                             style="text-align: center; background: #F3F4F6; font-weight: 600;">
                     </div>
 
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Export Qty</label>
                         <input type="number" placeholder="0.00">
                     </div>
 
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Blend Reference</label>
                         <input type="text">
                     </div>
 
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Contract Reference</label>
                         <input type="text">
                     </div>
@@ -727,16 +234,15 @@
 
             <!-- TABS & GRIDS -->
             <div class="mt-4">
-                <div class="ax-tabs">
-                    <button class="ax-tab active" onclick="switchTab('blend_details')">Blend Details</button>
-                    <button class="ax-tab" onclick="switchTab('contract_detail')">Contract Detail</button>
+                <div class="fb-tabs">
+                    <button class="fb-tab active" onclick="switchTab('blend_details')">Blend Details</button>
+                    <button class="fb-tab" onclick="switchTab('contract_detail')">Contract Detail</button>
                 </div>
 
                 <!-- Tab 1: Blend Details -->
-                <div id="blend_details" class="ax-tab-content active">
-                    <div id="colScroll2" class="griddivColumn wrapperForGridData2 gridFixedHeader" style="overflow: auto;">
-                        <div class="thhead"></div>
-                        <table class="customSetupTableMN gridHeader g-1 table table-striped table-bordered mt-1 mb-0 border-gray-300 table-sm" id="gridHd2" style="width: 2847px;">
+                <div id="blend_details" class="fb-tab-content active">
+                    <div id="colScroll2" class="fb-table-container">
+                        <table class="fb-table" id="gridHd2">
                             <thead>
                                 <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-300">
                                     <th id="uniqueEditDeleteAct2" class="text-center fw-boldest w-20px">
@@ -807,7 +313,7 @@
                         </table>
                     </div>
                     <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
-                        <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                        <button class="fb-btn fb-btn-white fb-btn-sm"
                             onclick="addBlendRow()">
                             <span class="material-icons" style="font-size: 16px;">add</span> New
                         </button>
@@ -815,10 +321,9 @@
                 </div>
 
                 <!-- Tab 2: Contract Detail -->
-                <div id="contract_detail" class="ax-tab-content">
-                    <div id="colScroll3" class="griddivColumn wrapperForGridData3 gridFixedHeader" style="overflow: auto;">
-                        <div class="thhead"></div>
-                        <table class="customSetupTableMN gridHeader g-1 table table-striped table-bordered mt-1 mb-0 border-gray-300 table-sm" id="gridHd3" style="width: 2491px;">
+                <div id="contract_detail" class="fb-tab-content">
+                    <div id="colScroll3" class="fb-table-container">
+                        <table class="fb-table" id="gridHd3">
                             <thead>
                                 <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-300">
                                     <th id="uniqueEditDeleteAct3" class="text-center fw-boldest w-20px">
@@ -849,7 +354,7 @@
                         </table>
                     </div>
                     <div style="background: #F8FAFC; padding: 0.5rem 1rem;">
-                        <button class="ax-btn ax-btn-white" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
+                        <button class="fb-btn fb-btn-white fb-btn-sm"
                             onclick="addContractRow()">
                             <span class="material-icons" style="font-size: 16px;">add</span> New
                         </button>
@@ -858,12 +363,12 @@
             </div>
 
             <!-- FOOTER -->
-            <div class="ax-footer">
-                <button class="ax-btn ax-btn-primary">
-                    <span class="material-icons" style="font-size:18px;">save</span> Submit
+            <div class="fb-footer">
+                <button class="fb-btn fb-btn-secondary">
+                    <span class="material-icons" style="font-size:18px;">add</span> New
                 </button>
-                <button class="ax-btn ax-btn-white">
-                    <span class="material-icons" style="font-size:18px;">add_circle_outline</span> New
+                <button class="fb-btn fb-btn-primary">
+                    <span class="material-icons" style="font-size:18px;">check</span> Submit
                 </button>
             </div>
 
@@ -871,35 +376,35 @@
     </div>
 
     <!-- Summary Overlay -->
-    <div class="summary-overlay" id="summaryOverlay" onclick="toggleSummaryPanel()"></div>
+    <div class="fb-panel-overlay" id="summaryOverlay" onclick="toggleSummaryPanel()"></div>
 
     <!-- Summary Panel -->
-    <div class="summary-panel" id="summaryPanel">
-        <div class="summary-panel-header">
+    <div class="fb-panel" id="summaryPanel">
+        <div class="fb-panel-header">
             <h2>Summary</h2>
-            <button class="close-panel-btn" onclick="toggleSummaryPanel()" title="Close Summary Panel" aria-label="Close Summary Panel">
+            <button class="fb-panel-close" onclick="toggleSummaryPanel()" title="Close Summary Panel" aria-label="Close Summary Panel">
                 <span class="material-icons">close</span>
             </button>
         </div>
-        <div class="summary-panel-content">
-            <div class="ax-form-section">
-                <div class="ax-form-group">
+        <div class="fb-panel-content">
+            <div class="fb-form-section">
+                <div class="fb-form-group">
                     <label>Total Blended Qty.</label>
                     <input type="number" id="summaryBlendedQty" readonly placeholder="0.00">
                 </div>
-                <div class="ax-form-group">
+                <div class="fb-form-group">
                     <label>Total Qty [Kgs]</label>
                     <input type="number" id="summaryTotalQty" readonly placeholder="0.00">
                 </div>
-                <div class="ax-form-group">
+                <div class="fb-form-group">
                     <label>Total Straight Line Qty.</label>
                     <input type="number" id="summaryStraightQty" readonly placeholder="0.00">
                 </div>
-                <div class="ax-form-group">
+                <div class="fb-form-group">
                     <label>Straight Line Avg.</label>
                     <input type="number" id="summaryStraightAvg" readonly placeholder="0.00">
                 </div>
-                <div class="ax-form-group" style="margin-top: 1rem;">
+                <div class="fb-form-group" style="margin-top: 1rem;">
                     <label>Remarks</label>
                     <textarea id="summaryRemarks" rows="4" placeholder="Enter summary remarks..." style="border-color: #10B981;"></textarea>
                 </div>
@@ -917,8 +422,8 @@
 
             // 2. Tab Switching
             window.switchTab = function (tabId) {
-                document.querySelectorAll('.ax-tab-content').forEach(tab => tab.classList.remove('active'));
-                document.querySelectorAll('.ax-tab').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.fb-tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.fb-tab').forEach(btn => btn.classList.remove('active'));
 
                 document.getElementById(tabId).classList.add('active');
                 event.target.classList.add('active');

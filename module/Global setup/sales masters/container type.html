@@ -4,342 +4,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Container Type | Global Setup</title>
+    <title>Container Type | Fresh Brew</title>
 
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-        /* --- SCOPED VARIABLES & RESET --- */
-        body {
-            margin: 0;
-            padding: 0;
-            background: #F3F4F6;
-        }
-
-        .ax-custom-wrapper {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --secondary: #64748B;
-            --bg-body: #F3F4F6;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-            --text-main: #111827;
-            --radius-lg: 16px;
-            --font-main: 'Inter', sans-serif;
-
-            font-family: var(--font-main) !important;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1rem 1rem 1rem;
-            box-sizing: border-box;
-        }
-
-        .ax-custom-wrapper * {
-            box-sizing: border-box;
-        }
-
-        .ax-glass-card {
-            width: 100%;
-            max-width: 600px;
-            background: var(--glass-bg);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--card-shadow);
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        /* --- HEADER --- */
-        .ax-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2.25rem 0.25rem 0.75rem 0.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .ax-page-title h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--text-main);
-        }
-
-        /* --- FORM GRID --- */
-        .ax-form-section {
-            padding: 2.25rem 0.25rem 0.75rem 0.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .ax-grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-        }
-
-        .ax-grid-1 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-        }
-
-        .ax-form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-        }
-
-        .ax-custom-wrapper label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--secondary);
-            text-align: center;
-        }
-
-        /* Required field indicator */
-        .required::after {
-            content: ' *';
-            color: #EF4444;
-            font-weight: 600;
-        }
-
-        .ax-custom-wrapper input,
-        .ax-custom-wrapper select,
-        .ax-custom-wrapper textarea {
-            width: 100%;
-            padding: 0.75rem 0.875rem;
-            border-radius: 8px;
-            border: 1px solid #E2E8F0;
-            background: #FFFFFF;
-            font-size: 0.95rem;
-            font-family: var(--font-main);
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.2s;
-            text-align: center;
-        }
-
-        .input-error {
-            border-left: 3px solid #EF4444 !important;
-        }
-
-        .ax-custom-wrapper input:focus,
-        .ax-custom-wrapper select:focus,
-        .ax-custom-wrapper textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        /* --- FOOTER --- */
-        .ax-footer {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding-top: 3.25rem;
-            border-top: 1px solid #F1F5F9;
-            margin-top: 1rem;
-        }
-
-        .ax-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.875rem 2.25rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-            font-size: 0.95rem;
-            min-width: 140px;
-            gap: 0.5rem;
-        }
-
-        .ax-btn-white {
-            background: white;
-            border: 1px solid #E2E8F0;
-            color: var(--text-main);
-        }
-
-        .ax-btn-white:hover {
-            background: #F8FAFC;
-            border-color: #CBD5E1;
-        }
-
-        .ax-btn-primary {
-            background: #3B82F6;
-            color: white;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-        }
-
-        .ax-btn-primary:hover {
-            background: #2563EB;
-            transform: translateY(-1px);
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        /* Toggle Switch */
-        .toggle-switch-group {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            width: 100%;
-            margin-top: 0.25rem;
-        }
-
-        .toggle-switch-group label {
-            margin: 0;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--secondary);
-            white-space: nowrap;
-        }
-
-        /* Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #CBD5E1;
-            transition: 0.3s;
-            border-radius: 24px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        input:checked+.toggle-slider {
-            background-color: #3182CE;
-        }
-
-        input:checked+.toggle-slider:before {
-            transform: translateX(24px);
-        }
-    </style>
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
 </head>
 
 <body>
 
-    <div class="ax-custom-wrapper">
-        <div class="ax-glass-card">
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 650px;">
 
-            <!-- HEADER TITLE -->
-            <div class="ax-header">
-                <div class="ax-page-title" style="display: flex; align-items: center; gap: 1.5rem;">
-                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
-                        <span class="material-icons" style="font-size: 1.5rem;">arrow_back</span>
-                    </button>
-                    <h1 style="font-size: 1.4rem; font-weight: 700; color: #1e293b;margin-right: 180px; letter-spacing: -0.01em;">Container Type</h1>
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Container Type</h1>
                 </div>
-                <div class="ax-header-actions" style="display: flex; align-items: center; gap: 1rem;">
-                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #088a6d;">
-                        <span class="material-icons" style="font-size: 1.6rem;">search</span>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
                     </button>
-                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
-                        <span class="material-icons" style="font-size: 1.6rem;">menu</span>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="List View">
+                        <span class="material-icons">list</span>
                     </button>
-                    <button class="ax-btn" style="background:transparent; padding:0; min-width: unset; color: #64748B;">
-                        <span class="material-icons" style="font-size: 1.6rem;">grid_view</span>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons">grid_on</span>
                     </button>
                 </div>
             </div>
 
-            <!-- FORM CONTENT -->
-            <div class="ax-form-section">
-                <!-- Row 1 - Shipment Mode & Container Type -->
-                <div class="ax-grid-2">
-                    <div class="ax-form-group">
+            <!-- FORM SECTION -->
+            <div class="fb-form-section">
+
+                <!-- SECTION: Container Information -->
+                <div class="fb-section-title">
+                    <span class="material-icons">inventory_2</span>
+                    Container Information
+                </div>
+
+                <!-- Row 1: Shipment Mode & Container Type -->
+                <div class="fb-grid-2">
+                    <div class="fb-form-group">
                         <label class="required">Shipment Mode</label>
                         <select id="shipment_mode">
                             <option value="">Select an option</option>
-                            <option value="">-- Select --</option>
+                            <option value="sea">Sea Freight</option>
+                            <option value="air">Air Freight</option>
+                            <option value="land">Land Transport</option>
                         </select>
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label class="required">Container Type</label>
-                        <input type="text" id="container_type" placeholder="Enter container type...">
+                        <input type="text" id="container_type" placeholder="Enter container type (e.g. 20ft GP)">
                     </div>
                 </div>
 
-                <!-- Row 2 - Volume & Max Gross Weight -->
-                <div class="ax-grid-2">
-                    <div class="ax-form-group">
+                <!-- Row 2: Volume & Max Gross Weight -->
+                <div class="fb-grid-2">
+                    <div class="fb-form-group">
                         <label>Volume (CBM)</label>
-                        <input type="number" id="volume" placeholder="Enter volume...">
+                        <input type="number" id="volume" step="0.01" placeholder="Enter volume in CBM">
                     </div>
-                    <div class="ax-form-group">
-                        <label>Max. Gross Weight ( Kgs)</label>
-                        <input type="number" id="max_gross_weight" placeholder="Enter weight...">
+                    <div class="fb-form-group">
+                        <label>Max. Gross Weight (Kgs)</label>
+                        <input type="number" id="max_gross_weight" step="0.01" placeholder="Enter max gross weight">
                     </div>
                 </div>
 
-                <!-- Row 3 - Max Net Weight & Active -->
-                <div class="ax-grid-2">
-                    <div class="ax-form-group">
-                        <label>Max. Net Weight ( Kgs)</label>
-                        <input type="number" id="max_net_weight" placeholder="Enter weight...">
+                <!-- Row 3: Max Net Weight & Active -->
+                <div class="fb-grid-2">
+                    <div class="fb-form-group">
+                        <label>Max. Net Weight (Kgs)</label>
+                        <input type="number" id="max_net_weight" step="0.01" placeholder="Enter max net weight">
                     </div>
-                    <div class="ax-form-group">
-                        <label>Active</label>
-                        <div class="toggle-switch-group">
-                            <label class="toggle-switch">
+                    <!-- ACTIVE TOGGLE -->
+                    <div class="fb-form-group">
+                        <label>Active Status</label>
+                        <div class="toggle-label-container">
+                            <label class="fb-toggle-switch">
                                 <input type="checkbox" id="active" checked>
-                                <span class="toggle-slider"></span>
+                                <span class="fb-toggle-slider"></span>
                             </label>
+                            <span class="text-secondary" style="font-size: 0.85rem;">Active</span>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- FOOTER -->
-            <div class="ax-footer">
-                <button class="ax-btn ax-btn-white" onclick="handleNew()">
-                    <span class="material-icons" style="font-size: 18px;">add</span>
+            <div class="fb-footer">
+                <button class="fb-btn fb-btn-secondary" onclick="handleNew()">
+                    <span class="material-icons">add</span>
                     New
                 </button>
-                <button class="ax-btn ax-btn-primary" onclick="handleSubmit()">
-                    <span class="material-icons" style="font-size: 18px;">check</span>
+                <button class="fb-btn fb-btn-primary" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
                     Submit
                 </button>
             </div>
@@ -350,28 +115,40 @@
     <script>
         // Handle form submission
         function handleSubmit() {
-            const shipmentMode = document.getElementById('shipment_mode').value;
-            const containerType = document.getElementById('container_type').value;
-            const volume = document.getElementById('volume').value;
-            const maxGrossWeight = document.getElementById('max_gross_weight').value;
-            const maxNetWeight = document.getElementById('max_net_weight').value;
-            const active = document.getElementById('active').checked;
+            const shipmentMode = document.getElementById('shipment_mode');
+            const containerType = document.getElementById('container_type');
+
+            let isValid = true;
+
+            // Reset error styles
+            [shipmentMode, containerType].forEach(el => el.classList.remove('fb-input-error'));
 
             // Validate required fields
-            if (!shipmentMode || !containerType) {
-                alert('Please fill in all required fields');
+            if (!shipmentMode.value) {
+                shipmentMode.classList.add('fb-input-error');
+                isValid = false;
+            }
+
+            if (!containerType.value.trim()) {
+                containerType.classList.add('fb-input-error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
                 return;
             }
 
-            console.log({
-                shipmentMode,
-                containerType,
-                volume,
-                maxGrossWeight,
-                maxNetWeight,
-                active
-            });
+            const formData = {
+                shipmentMode: shipmentMode.value,
+                containerType: containerType.value,
+                volume: document.getElementById('volume').value,
+                maxGrossWeight: document.getElementById('max_gross_weight').value,
+                maxNetWeight: document.getElementById('max_net_weight').value,
+                active: document.getElementById('active').checked
+            };
 
+            console.log('Container Type Form Data:', formData);
             alert('Container Type saved successfully!');
         }
 
@@ -383,19 +160,16 @@
             document.getElementById('max_gross_weight').value = '';
             document.getElementById('max_net_weight').value = '';
             document.getElementById('active').checked = true;
-            document.getElementById('container_type').focus();
+
+            // Focus on first field
+            document.getElementById('shipment_mode').focus();
+
+            console.log('Form cleared for new record');
         }
 
         // Initialize
-        window.addEventListener('DOMContentLoaded', function() {
-            // Add form validation on input
-            document.getElementById('container_type').addEventListener('blur', function() {
-                if (!this.value) {
-                    this.classList.add('input-error');
-                } else {
-                    this.classList.remove('input-error');
-                }
-            });
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Container Type page loaded');
         });
     </script>
 </body>

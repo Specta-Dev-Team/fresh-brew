@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Brew - Component Snippets</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            background: #F3F4F6;
+        }
+        .snippet-section {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .snippet-section h2 {
+            margin-top: 0;
+            color: #4F46E5;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 0.5rem;
+        }
+        pre {
+            background: #1F2937;
+            color: #F9FAFB;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #4F46E5;">Fresh Brew - Component Snippets</h1>
+    <p>Copy and paste these HTML snippets into your pages.</p>
+
+    <!-- BUTTONS -->
+    <div class="snippet-section">
+        <h2>Buttons</h2>
+        <pre><code>&lt;!-- Primary Button --&gt;
+&lt;button class="fb-btn fb-btn-primary"&gt;
+    &lt;span class="material-icons"&gt;check&lt;/span&gt;
+    Submit
+&lt;/button&gt;
+
+&lt;!-- Secondary Button --&gt;
+&lt;button class="fb-btn fb-btn-secondary"&gt;
+    &lt;span class="material-icons"&gt;add&lt;/span&gt;
+    New
+&lt;/button&gt;
+
+&lt;!-- White Button --&gt;
+&lt;button class="fb-btn fb-btn-white"&gt;Cancel&lt;/button&gt;
+
+&lt;!-- Small Button --&gt;
+&lt;button class="fb-btn fb-btn-primary fb-btn-sm"&gt;Small&lt;/button&gt;</code></pre>
+    </div>
+
+    <!-- FORM FIELDS -->
+    <div class="snippet-section">
+        <h2>Form Fields</h2>
+        <pre><code>&lt;!-- Text Input --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label class="required"&gt;Field Name&lt;/label&gt;
+    &lt;input type="text" placeholder="Enter value"&gt;
+&lt;/div&gt;
+
+&lt;!-- Number Input --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label&gt;Amount&lt;/label&gt;
+    &lt;input type="number" placeholder="0.00"&gt;
+&lt;/div&gt;
+
+&lt;!-- Date Input --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label&gt;Date&lt;/label&gt;
+    &lt;input type="date"&gt;
+&lt;/div&gt;
+
+&lt;!-- Dropdown --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label class="required"&gt;Select Option&lt;/label&gt;
+    &lt;select&gt;
+        &lt;option value=""&gt;Select an option&lt;/option&gt;
+        &lt;option value="1"&gt;Option 1&lt;/option&gt;
+        &lt;option value="2"&gt;Option 2&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Textarea --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label&gt;Notes&lt;/label&gt;
+    &lt;textarea placeholder="Enter notes"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+
+&lt;!-- Toggle Switch --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label&gt;Enable Feature&lt;/label&gt;
+    &lt;label class="fb-toggle-switch"&gt;
+        &lt;input type="checkbox"&gt;
+        &lt;span class="fb-toggle-slider"&gt;&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- Read-only Input --&gt;
+&lt;div class="fb-form-group"&gt;
+    &lt;label&gt;ID&lt;/label&gt;
+    &lt;input type="text" value="Auto" readonly&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- GRIDS -->
+    <div class="snippet-section">
+        <h2>Grid Layouts</h2>
+        <pre><code>&lt;!-- 2 Column Grid --&gt;
+&lt;div class="fb-grid-2"&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 3 Column Grid --&gt;
+&lt;div class="fb-grid-3"&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 4 Column Grid --&gt;
+&lt;div class="fb-grid-4"&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+    &lt;div class="fb-form-group"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- HEADER -->
+    <div class="snippet-section">
+        <h2>Page Header</h2>
+        <pre><code>&lt;div class="fb-header"&gt;
+    &lt;div class="fb-page-title"&gt;
+        &lt;h1&gt;Page Title&lt;/h1&gt;
+        &lt;p&gt;Optional description&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="fb-header-actions"&gt;
+        &lt;div class="fb-form-group"&gt;
+            &lt;label&gt;ID&lt;/label&gt;
+            &lt;input type="text" value="Auto" readonly&gt;
+        &lt;/div&gt;
+        &lt;button class="fb-btn fb-btn-primary"&gt;
+            &lt;span class="material-icons"&gt;add&lt;/span&gt;
+            Action
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- SECTION TITLE -->
+    <div class="snippet-section">
+        <h2>Section Title</h2>
+        <pre><code>&lt;div class="fb-section-title"&gt;
+    &lt;span class="material-icons"&gt;description&lt;/span&gt;
+    Section Name
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- TABS -->
+    <div class="snippet-section">
+        <h2>Tabs</h2>
+        <pre><code>&lt;div class="fb-tabs"&gt;
+    &lt;button class="fb-tab active" onclick="activateTab(0)"&gt;
+        &lt;span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;"&gt;edit&lt;/span&gt;
+        Tab 1
+    &lt;/button&gt;
+    &lt;button class="fb-tab" onclick="activateTab(1)"&gt;
+        &lt;span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;"&gt;list&lt;/span&gt;
+        Tab 2
+    &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id="tab0" class="fb-tab-content active"&gt;
+    &lt;!-- Tab 1 Content --&gt;
+&lt;/div&gt;
+
+&lt;div id="tab1" class="fb-tab-content"&gt;
+    &lt;!-- Tab 2 Content --&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function activateTab(tabIndex) {
+    document.querySelectorAll('.fb-tab-content').forEach(tab =&gt; {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.fb-tab').forEach(btn =&gt; {
+        btn.classList.remove('active');
+    });
+    document.getElementById(`tab${tabIndex}`).classList.add('active');
+    document.querySelectorAll('.fb-tab')[tabIndex].classList.add('active');
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <!-- TABLE -->
+    <div class="snippet-section">
+        <h2>Table</h2>
+        <pre><code>&lt;div class="fb-table-container"&gt;
+    &lt;table class="fb-table"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th style="width: 40px;"&gt;&lt;input type="checkbox"&gt;&lt;/th&gt;
+                &lt;th&gt;S.no&lt;/th&gt;
+                &lt;th&gt;Column 1&lt;/th&gt;
+                &lt;th&gt;Column 2&lt;/th&gt;
+                &lt;th&gt;Column 3&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody id="tableBody"&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;input type="checkbox"&gt;&lt;/td&gt;
+                &lt;td&gt;1&lt;/td&gt;
+                &lt;td&gt;&lt;input type="text"&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;input type="number"&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;select&gt;&lt;option&gt;&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+&lt;div style="background: #F8FAFC; padding: 0.75rem 1rem; border-top: 1px solid #E2E8F0;"&gt;
+    &lt;button class="fb-btn fb-btn-white fb-btn-sm" onclick="addRow()"&gt;
+        &lt;span class="material-icons" style="font-size: 16px;"&gt;add&lt;/span&gt; New
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="snippet-section">
+        <h2>Footer</h2>
+        <pre><code>&lt;div class="fb-footer"&gt;
+    &lt;button class="fb-btn fb-btn-secondary"&gt;
+        &lt;span class="material-icons"&gt;add&lt;/span&gt;
+        New
+    &lt;/button&gt;
+    &lt;button class="fb-btn fb-btn-primary"&gt;
+        &lt;span class="material-icons"&gt;check&lt;/span&gt;
+        Submit
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div class="snippet-section">
+        <h2>Side Panel</h2>
+        <pre><code>&lt;!-- Overlay --&gt;
+&lt;div class="fb-panel-overlay" id="panelOverlay" onclick="togglePanel()"&gt;&lt;/div&gt;
+
+&lt;!-- Panel --&gt;
+&lt;div class="fb-panel" id="sidePanel"&gt;
+    &lt;div class="fb-panel-header"&gt;
+        &lt;h2&gt;Panel Title&lt;/h2&gt;
+        &lt;button class="fb-panel-close" onclick="togglePanel()"&gt;
+            &lt;span class="material-icons"&gt;close&lt;/span&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="fb-panel-content"&gt;
+        &lt;div class="fb-form-section"&gt;
+            &lt;!-- Panel content --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function togglePanel() {
+    document.getElementById('sidePanel').classList.toggle('active');
+    document.getElementById('panelOverlay').classList.toggle('active');
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <!-- FULL PAGE STRUCTURE -->
+    <div class="snippet-section">
+        <h2>Full Page Structure</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    
+    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"&gt;
+    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"&gt;
+    &lt;link rel="stylesheet" href="../template/css/design-system.css"&gt;
+    &lt;link rel="stylesheet" href="../template/css/components.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class="fb-wrapper"&gt;
+        &lt;div class="fb-glass-card"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;div class="fb-header"&gt;
+                &lt;div class="fb-page-title"&gt;
+                    &lt;h1&gt;Page Title&lt;/h1&gt;
+                &lt;/div&gt;
+                &lt;div class="fb-header-actions"&gt;
+                    &lt;button class="fb-btn fb-btn-primary"&gt;Action&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- CONTENT --&gt;
+            &lt;div class="fb-form-section"&gt;
+                &lt;!-- Your content here --&gt;
+            &lt;/div&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;div class="fb-footer"&gt;
+                &lt;button class="fb-btn fb-btn-secondary"&gt;Cancel&lt;/button&gt;
+                &lt;button class="fb-btn fb-btn-primary"&gt;Submit&lt;/button&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+</body>
+</html>

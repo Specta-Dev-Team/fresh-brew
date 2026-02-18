@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Brew - Page Title</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../template/css/design-system.css">
+    <link rel="stylesheet" href="../template/css/components.css">
+</head>
+<body>
+
+    <div class="fb-wrapper">
+        <div class="fb-glass-card">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Page Title</h1>
+                    <p>Page description (optional)</p>
+                </div>
+                <div class="fb-header-actions">
+                    <!-- Header buttons/inputs go here -->
+                    <button class="fb-btn fb-btn-primary">
+                        <span class="material-icons">add</span>
+                        Action
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section">
+                
+                <!-- Section Title -->
+                <div class="fb-section-title">
+                    <span class="material-icons">description</span>
+                    Section Name
+                </div>
+
+                <!-- Form Grid -->
+                <div class="fb-grid-4">
+                    <div class="fb-form-group">
+                        <label class="required">Field Label</label>
+                        <input type="text" placeholder="Enter value">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Dropdown</label>
+                        <select>
+                            <option value="">Select an option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                        </select>
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Toggle</label>
+                        <label class="fb-toggle-switch">
+                            <input type="checkbox">
+                            <span class="fb-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TABS (Optional) -->
+            <div class="fb-tabs">
+                <button class="fb-tab active" onclick="activateTab(0)">
+                    <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">edit</span>
+                    Tab 1
+                </button>
+                <button class="fb-tab" onclick="activateTab(1)">
+                    <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">list</span>
+                    Tab 2
+                </button>
+            </div>
+
+            <!-- TAB CONTENT 1 -->
+            <div id="tab0" class="fb-tab-content active">
+                <div class="fb-table-container">
+                    <table class="fb-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"><input type="checkbox"></th>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                                <th>Column 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><select><option></option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 2 -->
+            <div id="tab1" class="fb-tab-content">
+                <div class="fb-form-section">
+                    <!-- Additional content -->
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="fb-footer">
+                <button class="fb-btn fb-btn-secondary">
+                    <span class="material-icons" style="font-size: 1rem;">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary">
+                    <span class="material-icons" style="font-size: 1rem;">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Side Panel Example (Optional) -->
+    <div class="fb-panel-overlay" id="panelOverlay" onclick="togglePanel()"></div>
+    <div class="fb-panel" id="sidePanel">
+        <div class="fb-panel-header">
+            <h2>Panel Title</h2>
+            <button class="fb-panel-close" onclick="togglePanel()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="fb-panel-content">
+            <!-- Panel content -->
+        </div>
+    </div>
+
+    <script>
+        function activateTab(tabIndex) {
+            document.querySelectorAll('.fb-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.fb-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`tab${tabIndex}`).classList.add('active');
+            document.querySelectorAll('.fb-tab')[tabIndex].classList.add('active');
+        }
+
+        function togglePanel() {
+            document.getElementById('sidePanel').classList.toggle('active');
+            document.getElementById('panelOverlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

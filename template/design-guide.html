@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Brew - Design Guide</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        .guide-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }
+        .guide-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+        .guide-section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.1rem;
+        }
+        .color-box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin: 0.5rem 1rem 0.5rem 0;
+            text-align: center;
+            padding: 0.5rem;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .demo-row {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        code {
+            background: #F3F4F6;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fb-wrapper">
+        <div class="fb-glass-card" style="max-width: 1200px;">
+            
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Fresh Brew Design Guide</h1>
+                    <p>Visual reference for all UI components</p>
+                </div>
+            </div>
+
+            <!-- COLORS -->
+            <div class="guide-section">
+                <h2>🎨 Colors</h2>
+                <div class="demo-row">
+                    <div class="color-box" style="background: #4F46E5;">
+                        Primary<br>#4F46E5
+                    </div>
+                    <div class="color-box" style="background: #4338CA;">
+                        Hover<br>#4338CA
+                    </div>
+                    <div class="color-box" style="background: #64748B;">
+                        Secondary<br>#64748B
+                    </div>
+                    <div class="color-box" style="background: #111827;">
+                        Text<br>#111827
+                    </div>
+                    <div class="color-box" style="background: #F3F4F6; color: #111827; border: 1px solid #E2E8F0;">
+                        Background<br>#F3F4F6
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYPOGRAPHY -->
+            <div class="guide-section">
+                <h2>📝 Typography</h2>
+                <p style="font-size: 2rem; font-weight: 700;">Heading 1 - Inter Bold</p>
+                <p style="font-size: 1.5rem; font-weight: 700;">Heading 2 - Inter Bold</p>
+                <p style="font-size: 1.2rem; font-weight: 600;">Heading 3 - Inter Semibold</p>
+                <p style="font-size: 1rem; font-weight: 500; margin-top: 1rem;">Body Large - Inter Medium</p>
+                <p style="font-size: 0.9rem; font-weight: 400;">Body Regular - Inter Regular</p>
+                <p style="font-size: 0.85rem; font-weight: 400;">Body Small - Inter Regular</p>
+                <p style="font-size: 0.75rem; font-weight: 500; color: var(--secondary);">Label - Inter Medium</p>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="guide-section">
+                <h2>🔘 Buttons</h2>
+                
+                <h3>Primary Buttons</h3>
+                <div class="demo-row">
+                    <button class="fb-btn fb-btn-primary">
+                        <span class="material-icons">check</span>
+                        Submit
+                    </button>
+                    <button class="fb-btn fb-btn-primary">Primary Button</button>
+                    <button class="fb-btn fb-btn-primary fb-btn-sm">Small Button</button>
+                    <button class="fb-btn fb-btn-primary fb-btn-lg">Large Button</button>
+                </div>
+                <code>.fb-btn.fb-btn-primary</code>
+
+                <h3>Secondary Buttons</h3>
+                <div class="demo-row">
+                    <button class="fb-btn fb-btn-secondary">
+                        <span class="material-icons">add</span>
+                        New
+                    </button>
+                    <button class="fb-btn fb-btn-secondary">Secondary Button</button>
+                </div>
+                <code>.fb-btn.fb-btn-secondary</code>
+
+                <h3>White Buttons</h3>
+                <div class="demo-row">
+                    <button class="fb-btn fb-btn-white">Cancel</button>
+                    <button class="fb-btn fb-btn-white">
+                        <span class="material-icons">close</span>
+                        Close
+                    </button>
+                </div>
+                <code>.fb-btn.fb-btn-white</code>
+            </div>
+
+            <!-- FORM FIELDS -->
+            <div class="guide-section">
+                <h2>📋 Form Fields</h2>
+                
+                <div class="fb-grid-3">
+                    <div class="fb-form-group">
+                        <label class="required">Text Input</label>
+                        <input type="text" placeholder="Enter value">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Number Input</label>
+                        <input type="number" placeholder="0.00">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Date Input</label>
+                        <input type="date">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Dropdown</label>
+                        <select>
+                            <option value="">Select an option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                        </select>
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Read-only</label>
+                        <input type="text" value="Auto" readonly>
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Text Area</label>
+                        <textarea placeholder="Enter notes"></textarea>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Toggle Switch</h3>
+                <div class="fb-form-group" style="max-width: 200px;">
+                    <label>Enable Feature</label>
+                    <label class="fb-toggle-switch">
+                        <input type="checkbox">
+                        <span class="fb-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- GRIDS -->
+            <div class="guide-section">
+                <h2>📐 Grid Layouts</h2>
+                
+                <h3>2 Column Grid</h3>
+                <div class="fb-grid-2" style="margin-bottom: 2rem;">
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Column 1</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Column 2</div>
+                </div>
+                <code>.fb-grid-2</code>
+
+                <h3>3 Column Grid</h3>
+                <div class="fb-grid-3" style="margin-bottom: 2rem;">
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Column 1</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Column 2</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Column 3</div>
+                </div>
+                <code>.fb-grid-3</code>
+
+                <h3>4 Column Grid</h3>
+                <div class="fb-grid-4" style="margin-bottom: 2rem;">
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Col 1</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Col 2</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Col 3</div>
+                    <div style="background: #EEF2FF; padding: 1rem; border-radius: 4px; text-align: center;">Col 4</div>
+                </div>
+                <code>.fb-grid-4</code>
+            </div>
+
+            <!-- TABS -->
+            <div class="guide-section">
+                <h2>📑 Tabs</h2>
+                <div class="fb-tabs">
+                    <button class="fb-tab active">
+                        <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">edit</span>
+                        Tab 1
+                    </button>
+                    <button class="fb-tab">
+                        <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">list</span>
+                        Tab 2
+                    </button>
+                    <button class="fb-tab">
+                        <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">settings</span>
+                        Tab 3
+                    </button>
+                </div>
+                <div class="fb-tab-content active">
+                    <p style="padding: 1rem; background: #F8FAFC; border-radius: 4px;">Tab 1 Content</p>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="guide-section">
+                <h2>📊 Table</h2>
+                <div class="fb-table-container">
+                    <table class="fb-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"><input type="checkbox"></th>
+                                <th>S.no</th>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                                <th>Column 3</th>
+                                <th>Column 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td><input type="text" value="Sample value"></td>
+                                <td><input type="number" value="100"></td>
+                                <td><select><option>Option 1</option></select></td>
+                                <td><input type="date"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>2</td>
+                                <td><input type="text"></td>
+                                <td><input type="number"></td>
+                                <td><select><option></option></select></td>
+                                <td><input type="date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: #F8FAFC; padding: 0.75rem 1rem; border-top: 1px solid #E2E8F0; margin-top: -1px; border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New Row
+                    </button>
+                </div>
+            </div>
+
+            <!-- ICONS -->
+            <div class="guide-section">
+                <h2>🔣 Material Icons</h2>
+                <p style="margin-bottom: 1rem;">Commonly used icons:</p>
+                <div class="demo-row" style="font-size: 1.5rem; color: var(--secondary);">
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">check</span>
+                        <p style="font-size: 0.75rem;">check</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">add</span>
+                        <p style="font-size: 0.75rem;">add</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">close</span>
+                        <p style="font-size: 0.75rem;">close</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">edit</span>
+                        <p style="font-size: 0.75rem;">edit</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">delete</span>
+                        <p style="font-size: 0.75rem;">delete</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">search</span>
+                        <p style="font-size: 0.75rem;">search</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">description</span>
+                        <p style="font-size: 0.75rem;">description</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">receipt_long</span>
+                        <p style="font-size: 0.75rem;">receipt_long</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">local_shipping</span>
+                        <p style="font-size: 0.75rem;">local_shipping</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">domain</span>
+                        <p style="font-size: 0.75rem;">domain</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">schedule</span>
+                        <p style="font-size: 0.75rem;">schedule</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="material-icons" style="font-size: 2rem;">list</span>
+                        <p style="font-size: 0.75rem;">list</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--secondary);">
+                    Find more icons at <a href="https://fonts.google.com/icons" target="_blank" style="color: var(--primary);">Google Material Icons</a>
+                </p>
+            </div>
+
+            <!-- SPACING -->
+            <div class="guide-section">
+                <h2>📏 Spacing</h2>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <strong>Small (0.5rem)</strong>
+                        <div style="background: #4F46E5; height: 0.5rem; width: 100px; margin-top: 0.5rem;"></div>
+                    </div>
+                    <div>
+                        <strong>Medium (1rem)</strong>
+                        <div style="background: #4F46E5; height: 1rem; width: 100px; margin-top: 0.5rem;"></div>
+                    </div>
+                    <div>
+                        <strong>Large (1.5rem)</strong>
+                        <div style="background: #4F46E5; height: 1.5rem; width: 100px; margin-top: 0.5rem;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

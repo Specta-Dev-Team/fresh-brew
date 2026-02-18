@@ -4,504 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor | Custom Interface</title>
+    <title>Vendor Management | Fresh Brew</title>
 
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-        /* --- SCOPED VARIABLES & RESET --- */
-        body {
-            margin: 0;
-            padding: 0;
-            background: #F3F4F6;
-        }
-
-        .ax-custom-wrapper {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --secondary: #64748B;
-            --bg-body: #F3F4F6;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
-            --text-main: #111827;
-            --radius-lg: 16px;
-            --font-main: 'Inter', sans-serif;
-
-            font-family: var(--font-main) !important;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-
-        .ax-custom-wrapper * {
-            box-sizing: border-box;
-        }
-
-        .ax-glass-card {
-            width: 100%;
-            max-width: 1400px;
-            background: var(--glass-bg);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--card-shadow);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        /* --- HEADER --- */
-        .ax-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #E2E8F0;
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .ax-page-title h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--primary);
-        }
-
-        .ax-page-title p {
-            color: var(--secondary);
-            font-size: 0.75rem;
-            margin-top: 0.15rem;
-            margin-bottom: 0;
-        }
-
-        .ax-header-actions {
-            display: flex;
-            align-items: flex-end;
-            gap: 1rem;
-        }
-
-        .ax-header-actions .ax-form-group {
-            margin: 0;
-        }
-
-        .ax-header-actions input {
-            width: 150px !important;
-            text-align: center;
-        }
-
-        .ax-header-actions .ax-btn {
-            margin-bottom: 0;
-            padding: 0.5rem 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-        }
-
-        /* --- FORM --- */
-        .ax-form-section {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .ax-section-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .ax-section-title .material-icons {
-            font-size: 1.2rem;
-            color: var(--secondary);
-        }
-
-        .ax-grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-grid-6 {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 0.75rem;
-        }
-
-        .ax-form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .ax-custom-wrapper label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--secondary);
-        }
-
-        /* Required field indicator */
-        .required::after {
-            content: ' *';
-            color: #EF4444;
-            font-weight: 600;
-        }
-
-        .ax-custom-wrapper input,
-        .ax-custom-wrapper select,
-        .ax-custom-wrapper textarea {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border-radius: 4px;
-            border: 1px solid #E2E8F0;
-            background: #FFFFFF;
-            font-size: 0.85rem;
-            font-family: var(--font-main);
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .ax-custom-wrapper input:read-only {
-            background-color: #FAFAFA;
-            color: #666;
-        }
-
-        .ax-custom-wrapper input:focus,
-        .ax-custom-wrapper select:focus,
-        .ax-custom-wrapper textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        /* Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #CBD5E1;
-            transition: 0.3s;
-            border-radius: 24px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        input:checked+.toggle-slider {
-            background-color: var(--primary);
-        }
-
-        input:checked+.toggle-slider:before {
-            transform: translateX(24px);
-        }
-
-        .toggle-label-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toggle-label-container label {
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-
-        /* --- TABS --- */
-        .ax-tabs {
-            display: flex;
-            gap: 0.5rem;
-            border-bottom: 2px solid #E2E8F0;
-            margin-bottom: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .ax-tab {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: transparent;
-            color: var(--secondary);
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            font-family: var(--font-main);
-            font-size: 0.85rem;
-        }
-
-        .ax-tab:hover {
-            color: var(--primary);
-        }
-
-        .ax-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .ax-tab-content {
-            display: none;
-        }
-
-        .ax-tab-content.active {
-            display: block;
-        }
-
-        /* --- TABLE --- */
-        .ax-table-container {
-            width: 100%;
-            overflow-x: auto;
-            margin-top: 1rem;
-            border: 1px solid #E2E8F0;
-            border-radius: 10px;
-            overflow-y: visible;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .ax-custom-wrapper table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        .ax-custom-wrapper thead {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .ax-custom-wrapper th {
-            text-align: left;
-            padding: 0.6rem 0.75rem;
-            background: #F8FAFC;
-            font-weight: 600;
-            color: var(--secondary);
-            border-bottom: 1px solid #E2E8F0;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            vertical-align: middle;
-            min-width: 80px;
-        }
-
-        .ax-custom-wrapper th:first-child {
-            text-align: center;
-            width: 50px;
-            min-width: 50px;
-        }
-
-        .ax-custom-wrapper tbody tr {
-            border-bottom: 1px solid #F1F5F9;
-            transition: background-color 0.15s ease;
-        }
-
-        .ax-custom-wrapper tbody tr:hover {
-            background-color: #F8FAFC;
-        }
-
-        .ax-custom-wrapper td {
-            padding: 0.5rem 0.75rem;
-            border: none;
-            vertical-align: middle;
-            min-width: 80px;
-        }
-
-        .ax-custom-wrapper td:first-child {
-            text-align: center;
-            width: 50px;
-            min-width: 50px;
-        }
-
-        .ax-custom-wrapper td input,
-        .ax-custom-wrapper td select {
-            width: 100%;
-            min-width: 70px;
-            border: 1px solid transparent;
-            background: transparent;
-            padding: 0.5rem;
-            font-size: 0.9rem;
-            transition: all 0.15s ease;
-            font-family: var(--font-main);
-        }
-
-        .ax-custom-wrapper td input::placeholder {
-            color: #CBD5E1;
-        }
-
-        .ax-custom-wrapper td input:hover,
-        .ax-custom-wrapper td select:hover {
-            background-color: #FFFFFF;
-        }
-
-        .ax-custom-wrapper td input:focus,
-        .ax-custom-wrapper td select:focus {
-            background: white;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
-            outline: none;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        /* --- FOOTER --- */
-        .ax-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid #F1F5F9;
-        }
-
-        .ax-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            gap: 0.5rem;
-        }
-
-        .ax-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .ax-btn-primary {
-            background: #3B82F6;
-            color: white;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
-        }
-
-        .ax-btn-primary:hover {
-            background: #2563EB;
-        }
-
-        .ax-btn-white {
-            background: white;
-            border: 1.5px solid #3B82F6;
-            color: #3B82F6;
-        }
-
-        .ax-btn-white:hover {
-            background: #EFF6FF;
-            border-color: #2563EB;
-            color: #2563EB;
-        }
-
-        .icon-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.4rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary);
-            transition: all 0.2s;
-        }
-
-        .icon-btn:hover {
-            color: var(--primary);
-            background: #F8FAFC;
-            border-radius: 4px;
-        }
-    </style>
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
 </head>
 
 <body>
 
-    <div class="ax-custom-wrapper">
-        <div class="ax-glass-card">
+    <div class="fb-wrapper">
+        <div class="fb-glass-card">
 
             <!-- HEADER -->
-            <div class="ax-header">
-                <div class="ax-page-title">
+            <div class="fb-header">
+                <div class="fb-page-title">
                     <h1>Vendor</h1>
                 </div>
-                <div class="ax-header-actions">
-                    <button class="icon-btn" title="Search">
-                        <span class="material-icons">search</span>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white" title="Search">
+                        <span class="material-icons" style="font-size: 1rem;">search</span>
                     </button>
-                    <button class="icon-btn" title="List View">
-                        <span class="material-icons">list</span>
+                    <button class="fb-btn fb-btn-white" title="List View">
+                        <span class="material-icons" style="font-size: 1rem;">list</span>
                     </button>
-                    <button class="icon-btn" title="Grid View">
-                        <span class="material-icons">grid_on</span>
+                    <button class="fb-btn fb-btn-white" title="Grid View">
+                        <span class="material-icons" style="font-size: 1rem;">grid_on</span>
                     </button>
                 </div>
             </div>
 
             <!-- FORM SECTION -->
-            <div class="ax-form-section">
+            <div class="fb-form-section">
 
                 <!-- SECTION 1: Basic Information -->
-                <div class="ax-section-title">
+                <div class="fb-section-title">
                     <span class="material-icons">business</span>
                     Basic Information
                 </div>
 
-                <!-- Row 1: Company, Vendor Group -->
-                <div class="ax-grid-2">
-                    <div class="ax-form-group">
+                <div class="fb-grid-2">
+                    <div class="fb-form-group">
                         <label class="required">Company</label>
                         <select id="company">
                             <option value="">-- Select --</option>
                             <option value="vintage">Vintage Teas Ceylon (Pvt) Ltd</option>
                         </select>
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Vendor Group</label>
                         <select id="vendorGroup">
                             <option value="">Select an option</option>
@@ -509,51 +63,48 @@
                     </div>
                 </div>
 
-                <!-- Row 2: Vendor Code, Vendor Name, Vendor Short Code -->
-                <div class="ax-grid-3">
-                    <div class="ax-form-group">
+                <div class="fb-grid-3">
+                    <div class="fb-form-group">
                         <label>Vendor Code</label>
-                        <input type="text" id="vendorCode" placeholder="">
+                        <input type="text" id="vendorCode" placeholder="Auto-generated">
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label class="required">Vendor Name</label>
                         <input type="text" id="vendorName" placeholder="Enter vendor name">
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Vendor Short Code</label>
-                        <input type="text" id="vendorShortCode" placeholder="">
+                        <input type="text" id="vendorShortCode" placeholder="Short name">
                     </div>
                 </div>
 
-                <!-- Row 3: SVAT No, VAT No, Supplier Grade -->
-                <div class="ax-grid-4">
-                    <div class="ax-form-group">
+                <div class="fb-grid-4">
+                    <div class="fb-form-group">
                         <label>SVAT No.</label>
-                        <input type="text" id="svatNo" placeholder="">
+                        <input type="text" id="svatNo">
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>VAT No.</label>
-                        <input type="text" id="vatNo" placeholder="">
+                        <input type="text" id="vatNo">
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Supplier Grade</label>
                         <select id="supplierGrade">
                             <option value="">-- Select --</option>
                         </select>
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>TIEP / Bond No</label>
-                        <input type="text" id="tiepBondNo" placeholder="">
+                        <input type="text" id="tiepBondNo">
                     </div>
                 </div>
 
-                <!-- Row 4: Appointed On, Broker Code -->
-                <div class="ax-grid-2">
-                    <div class="ax-form-group">
+                <div class="fb-grid-2">
+                    <div class="fb-form-group">
                         <label>Appointed On</label>
                         <input type="date" id="appointedOn">
                     </div>
-                    <div class="ax-form-group">
+                    <div class="fb-form-group">
                         <label>Broker Code</label>
                         <select id="brokerCode">
                             <option value="">Select an option</option>
@@ -562,111 +113,120 @@
                 </div>
 
                 <!-- SECTION 2: Vendor Attributes -->
-                <div class="ax-section-title">
+                <div class="fb-section-title">
                     <span class="material-icons">check_circle</span>
                     Vendor Attributes
                 </div>
 
-                <!-- Toggles Row 1 -->
-                <div class="ax-grid-6">
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Active</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="active" checked>
-                            <span class="toggle-slider"></span>
-                        </label>
+                <div class="fb-grid-4">
+                    <!-- Attributes logic grouped for clean styling -->
+                    <div class="fb-form-group">
+                        <label>General Status</label>
+                        <div class="toggle-label-container">
+                            <label class="fb-toggle-switch">
+                                <input type="checkbox" id="active" checked>
+                                <span class="fb-toggle-slider"></span>
+                            </label>
+                            <span style="font-size: 0.85rem; color: var(--secondary);">Active</span>
+                        </div>
                     </div>
-
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Tea Purchase?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="teaPurchase">
-                            <span class="toggle-slider"></span>
-                        </label>
+                    <div class="fb-form-group">
+                        <label>Purchase Types</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="teaPurchase">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Tea Purchase</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="importPurchase">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Import Purchase</span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Import Purchase?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="importPurchase">
-                            <span class="toggle-slider"></span>
-                        </label>
+                    <div class="fb-form-group">
+                        <label>Operation Types</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="localPurchase">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Local Purchase</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="subContract">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Sub Contract</span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Local Purchase?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="localPurchase">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Sub Contract?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="subContract">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Shipping Carrier?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="shippingCarrier">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Toggle Row 2 -->
-                <div class="ax-grid-6">
-                    <div class="toggle-label-container">
-                        <label style="margin-bottom: 0; font-weight: 500;">Loan?</label>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="loan">
-                            <span class="toggle-slider"></span>
-                        </label>
+                    <div class="fb-form-group">
+                        <label>Miscellaneous</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="shippingCarrier">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Shipping Carrier</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="loan">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                                <span style="font-size: 0.85rem; color: var(--secondary);">Loan Eligible</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
 
             <!-- TABS -->
-            <div class="ax-tabs">
-                <button class="ax-tab active" onclick="activateTab(0)">
+            <div class="fb-tabs">
+                <button class="fb-tab active" onclick="activateTab(0)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">home</span>
                     Address
                 </button>
-                <button class="ax-tab" onclick="activateTab(1)">
+                <button class="fb-tab" onclick="activateTab(1)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">account_balance</span>
                     Bank Info
                 </button>
-                <button class="ax-tab" onclick="activateTab(2)">
+                <button class="fb-tab" onclick="activateTab(2)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">receipt</span>
                     Bill To Details
                 </button>
-                <button class="ax-tab" onclick="activateTab(3)">
+                <button class="fb-tab" onclick="activateTab(3)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">person</span>
                     Payee
                 </button>
-                <button class="ax-tab" onclick="activateTab(4)">
+                <button class="fb-tab" onclick="activateTab(4)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">description</span>
-                    Terms And Conditions
+                    Terms
                 </button>
-                <button class="ax-tab" onclick="activateTab(5)">
+                <button class="fb-tab" onclick="activateTab(5)">
                     <span class="material-icons" style="font-size: 1rem; margin-right: 0.4rem;">security</span>
                     Insurance
                 </button>
             </div>
 
             <!-- TAB 1: ADDRESS -->
-            <div id="tab0" class="ax-tab-content active">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab0" class="fb-tab-content active">
+                <div class="fb-table-container">
+                    <table class="fb-table">
                         <thead>
                             <tr>
                                 <th style="width: 40px;"><input type="checkbox"></th>
-                                <th>S.no</th>
+                                <th style="width: 50px;">S.no</th>
                                 <th>Address Type</th>
                                 <th>Address 1</th>
                                 <th>Address 2</th>
@@ -684,12 +244,20 @@
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>1</td>
-                                <td><select><option>-- Select --</option><option>Primary</option><option>Secondary</option><option>Sub Location</option></select></td>
+                                <td><select>
+                                        <option>-- Select --</option>
+                                        <option>Primary</option>
+                                        <option>Secondary</option>
+                                    </select></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
-                                <td><select><option>Select an option</option></select></td>
-                                <td><select><option>Select an option</option></select></td>
+                                <td><select>
+                                        <option>Select an option</option>
+                                    </select></td>
+                                <td><select>
+                                        <option>Select an option</option>
+                                    </select></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
@@ -699,21 +267,22 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="background: #F8FAFC; padding: 0.75rem 1rem; border-top: 1px solid #E2E8F0;">
-                    <button class="ax-btn ax-btn-white" style="padding: 0.4rem 1rem; font-size: 0.85rem;" onclick="addAddressRow()">
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addAddressRow()">
                         <span class="material-icons" style="font-size: 16px;">add</span> New Address
                     </button>
                 </div>
             </div>
 
             <!-- TAB 2: BANK INFO -->
-            <div id="tab1" class="ax-tab-content">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab1" class="fb-tab-content">
+                <div class="fb-table-container">
+                    <table class="fb-table">
                         <thead>
                             <tr>
                                 <th style="width: 40px;"><input type="checkbox"></th>
-                                <th>S.no</th>
+                                <th style="width: 50px;">S.no</th>
                                 <th>A/c No.</th>
                                 <th>Bank A/c Name</th>
                                 <th>Bank Name</th>
@@ -731,135 +300,143 @@
                                 <td>1</td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
-                                <td><select><option>Select an option</option></select></td>
+                                <td><select>
+                                        <option>Select an option</option>
+                                    </select></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
                                 <td><input type="text"></td>
-                                <td><select><option>Select an option</option></select></td>
-                                <td><select><option>Select an option</option></select></td>
+                                <td><select>
+                                        <option>Select an option</option>
+                                    </select></td>
+                                <td><select>
+                                        <option>Select an option</option>
+                                    </select></td>
                                 <td><input type="text"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div style="background: #F8FAFC; padding: 0.75rem 1rem; border-top: 1px solid #E2E8F0;">
-                    <button class="ax-btn ax-btn-white" style="padding: 0.4rem 1rem; font-size: 0.85rem;" onclick="addBankRow()">
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addBankRow()">
                         <span class="material-icons" style="font-size: 16px;">add</span> New Bank Info
                     </button>
                 </div>
             </div>
 
             <!-- TAB 3: BILL TO DETAILS -->
-            <div id="tab2" class="ax-tab-content">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab2" class="fb-tab-content">
+                <div class="fb-table-container">
+                    <table class="fb-table" style="min-width: 1500px;">
                         <thead>
                             <tr>
-                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="billCheckAll"></th>
+                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="billCheckAll">
+                                </th>
                                 <th style="width: 60px;">S.No</th>
-                                <th style="width: 350px;">Account Name</th>
+                                <th style="width: 300px;">Account Name</th>
                                 <th style="width: 120px;">Currency</th>
                                 <th style="width: 140px;">Bill To Site No</th>
                                 <th style="width: 200px;">Bill To Site Name</th>
                                 <th style="width: 150px;">Tax Code</th>
                                 <th style="width: 180px;">Payment Terms</th>
-                                <th style="width: 170px;">Shipment Terms</th>
-                                <th style="width: 120px;">Credit Days</th>
-                                <th style="width: 130px;">Credit Limit</th>
-                                <th style="width: 200px;">Address 1</th>
-                                <th style="width: 180px;">Address 2</th>
-                                <th style="width: 180px;">Address 3</th>
-                                <th style="width: 180px;">Country</th>
-                                <th style="width: 150px;">State</th>
-                                <th style="width: 150px;">City</th>
-                                <th style="width: 130px;">Postal Code</th>
-                                <th style="width: 130px;">Phone</th>
-                                <th style="width: 130px;">Fax</th>
-                                <th style="width: 180px;">Email</th>
-                                <th style="width: 150px;">Sub Ledger Code</th>
+                                <th>Shipment Terms</th>
+                                <th>Credit Days</th>
+                                <th>Credit Limit</th>
                             </tr>
                         </thead>
                         <tbody id="billToTableBody">
                         </tbody>
                     </table>
                 </div>
-                <button class="ax-btn ax-btn-primary" style="margin-top: 1rem;" onclick="addBillToRow()">
-                    <span class="material-icons">add</span>
-                    New Bill To Site
-                </button>
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addBillToRow()">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New Bill To Site
+                    </button>
+                </div>
             </div>
 
             <!-- TAB 4: PAYEE -->
-            <div id="tab3" class="ax-tab-content">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab3" class="fb-tab-content">
+                <div class="fb-table-container">
+                    <table class="fb-table">
                         <thead>
                             <tr>
-                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="payeeCheckAll"></th>
+                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="payeeCheckAll">
+                                </th>
                                 <th style="width: 60px;">S.No</th>
-                                <th style="width: 400px;">Payee Name</th>
+                                <th>Payee Name</th>
                             </tr>
                         </thead>
                         <tbody id="payeeTableBody">
                         </tbody>
                     </table>
                 </div>
-                <button class="ax-btn ax-btn-primary" style="margin-top: 1rem;" onclick="addPayeeRow()">
-                    <span class="material-icons">add</span>
-                    New Payee
-                </button>
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addPayeeRow()">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New Payee
+                    </button>
+                </div>
             </div>
 
             <!-- TAB 5: TERMS AND CONDITIONS -->
-            <div id="tab4" class="ax-tab-content">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab4" class="fb-tab-content">
+                <div class="fb-table-container">
+                    <table class="fb-table">
                         <thead>
                             <tr>
-                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="termsCheckAll"></th>
+                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="termsCheckAll">
+                                </th>
                                 <th style="width: 60px;">S.No</th>
-                                <th style="width: 600px;">Terms</th>
+                                <th>Terms</th>
                             </tr>
                         </thead>
                         <tbody id="termsTableBody">
                         </tbody>
                     </table>
                 </div>
-                <button class="ax-btn ax-btn-primary" style="margin-top: 1rem;" onclick="addTermsRow()">
-                    <span class="material-icons">add</span>
-                    New Terms
-                </button>
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addTermsRow()">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New Terms
+                    </button>
+                </div>
             </div>
 
             <!-- TAB 6: INSURANCE -->
-            <div id="tab5" class="ax-tab-content">
-                <div class="ax-table-container">
-                    <table>
+            <div id="tab5" class="fb-tab-content">
+                <div class="fb-table-container">
+                    <table class="fb-table">
                         <thead>
                             <tr>
-                                <th style="text-align: center; width: 40px;"><input type="checkbox" id="insuranceCheckAll"></th>
+                                <th style="text-align: center; width: 40px;"><input type="checkbox"
+                                        id="insuranceCheckAll"></th>
                                 <th style="width: 60px;">S.No</th>
-                                <th style="width: 400px;">Insurance Company</th>
+                                <th>Insurance Company</th>
                             </tr>
                         </thead>
                         <tbody id="insuranceTableBody">
                         </tbody>
                     </table>
                 </div>
-                <button class="ax-btn ax-btn-primary" style="margin-top: 1rem;" onclick="addInsuranceRow()">
-                    <span class="material-icons">add</span>
-                    New Insurance
-                </button>
+                <div
+                    style="background: var(--bg-body); padding: 0.75rem 1rem; border-top: 1px solid var(--border-light); border-radius: 0 0 10px 10px;">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" onclick="addInsuranceRow()">
+                        <span class="material-icons" style="font-size: 16px;">add</span> New Insurance
+                    </button>
+                </div>
             </div>
 
             <!-- FOOTER -->
-            <div class="ax-footer">
-                <button class="ax-btn ax-btn-white" onclick="handleNew()">
-                    <span class="material-icons" style="font-size: 1rem;">add</span>
+            <div class="fb-footer">
+                <button class="fb-btn fb-btn-secondary" onclick="handleNew()">
+                    <span class="material-icons">add</span>
                     New
                 </button>
-                <button class="ax-btn ax-btn-primary" onclick="handleSubmit()">
-                    <span class="material-icons" style="font-size: 1rem;">check</span>
+                <button class="fb-btn fb-btn-primary" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
                     Submit
                 </button>
             </div>
@@ -869,20 +446,19 @@
 
     <script>
         function activateTab(tabIndex) {
-            // Hide all tabs
-            document.querySelectorAll('.ax-tab-content').forEach(tab => {
+            document.querySelectorAll('.fb-tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            document.querySelectorAll('.ax-tab').forEach(btn => {
+            document.querySelectorAll('.fb-tab').forEach(btn => {
                 btn.classList.remove('active');
             });
 
-            // Show selected tab
             document.getElementById(`tab${tabIndex}`).classList.add('active');
-            document.querySelectorAll('.ax-tab')[tabIndex].classList.add('active');
+            document.querySelectorAll('.fb-tab')[tabIndex].classList.add('active');
         }
 
         function handleNew() {
+            // Reset fields
             document.getElementById('company').value = '';
             document.getElementById('vendorGroup').value = '';
             document.getElementById('vendorCode').value = '';
@@ -894,6 +470,8 @@
             document.getElementById('tiepBondNo').value = '';
             document.getElementById('appointedOn').value = '';
             document.getElementById('brokerCode').value = '';
+
+            // Reset toggles
             document.getElementById('active').checked = true;
             document.getElementById('teaPurchase').checked = false;
             document.getElementById('importPurchase').checked = false;
@@ -901,138 +479,107 @@
             document.getElementById('subContract').checked = false;
             document.getElementById('shippingCarrier').checked = false;
             document.getElementById('loan').checked = false;
+
+            // Clear errors
+            document.querySelectorAll('input, select').forEach(el => el.classList.remove('fb-input-error'));
+
             console.log('New vendor record initialized');
+            document.getElementById('company').focus();
         }
 
         function handleSubmit() {
-            const company = document.getElementById('company').value;
-            const vendorName = document.getElementById('vendorName').value;
+            const company = document.getElementById('company');
+            const vendorName = document.getElementById('vendorName');
 
-            if (!company || !vendorName) {
-                alert('Please fill in all required fields');
+            let isValid = true;
+            if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
+            else { company.classList.remove('fb-input-error'); }
+
+            if (!vendorName.value.trim()) { vendorName.classList.add('fb-input-error'); isValid = false; }
+            else { vendorName.classList.remove('fb-input-error'); }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
                 return;
             }
 
             console.log('Vendor form submitted', {
-                company,
-                vendorName
+                company: company.value,
+                vendorName: vendorName.value
             });
 
-            alert('Vendor saved successfully!');
+            alert('Vendor record saved successfully!');
+        }
+
+        // GRID ROW ADDITION HELPERS
+        function createCommonRow(tbodyId, columnsHtml) {
+            const tbody = document.getElementById(tbodyId);
+            const newRow = tbody.insertRow();
+            const rowNum = tbody.rows.length;
+            newRow.innerHTML = `<td><input type="checkbox"></td><td>${rowNum}</td>` + columnsHtml;
         }
 
         function addAddressRow() {
-            const tbody = document.getElementById('addressTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
-                <td><select><option>-- Select --</option><option>Primary</option><option>Secondary</option><option>Sub Location</option></select></td>
+            createCommonRow('addressTableBody', `
+                <td><select><option>-- Select --</option><option>Primary</option><option>Secondary</option></select></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
+                <td><select><option>Select option</option></select></td>
+                <td><select><option>Select option</option></select></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
                 <td><input type="email"></td>
                 <td><input type="text"></td>
-            `;
+            `);
         }
 
         function addBankRow() {
-            const tbody = document.getElementById('bankTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
+            createCommonRow('bankTableBody', `
                 <td><input type="text"></td>
                 <td><input type="text"></td>
-                <td><select><option>Select an option</option></select></td>
+                <td><select><option>Select bank</option></select></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
+                <td><select><option>Select country</option></select></td>
+                <td><select><option>Select city</option></select></td>
                 <td><input type="text"></td>
-            `;
+            `);
         }
 
         function addBillToRow() {
-            const tbody = document.getElementById('billToTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
-                <td><select><option>Select an option</option></select></td>
+            createCommonRow('billToTableBody', `
+                <td><select><option>Select account</option></select></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
                 <td><input type="text"></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><input type="text" class="text-right"></td>
-                <td><input type="text" class="text-right"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><select><option>Select an option</option></select></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="email"></td>
-                <td><input type="text"></td>
-            `;
+                <td><select><option>Select tax</option></select></td>
+                <td><select><option>Select terms</option></select></td>
+                <td><select><option>Select shipment</option></select></td>
+                <td><input type="number" value="0"></td>
+                <td><input type="number" value="0.00"></td>
+            `);
         }
 
         function addPayeeRow() {
-            const tbody = document.getElementById('payeeTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
-                <td><input type="text"></td>
-            `;
+            createCommonRow('payeeTableBody', `<td><input type="text" placeholder="Payee name"></td>`);
         }
 
         function addTermsRow() {
-            const tbody = document.getElementById('termsTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
-                <td><textarea style="width: 100%; min-height: 50px; padding: 0.5rem; border: 1px solid #E2E8F0; border-radius: 4px; font-family: var(--font-main); font-size: 0.9rem;"></textarea></td>
-            `;
+            createCommonRow('termsTableBody', `<td><textarea style="width: 100%; border:none; background:transparent; font-family:inherit; font-size:0.9rem;" placeholder="Enter term details..."></textarea></td>`);
         }
 
         function addInsuranceRow() {
-            const tbody = document.getElementById('insuranceTableBody');
-            const newRow = tbody.insertRow();
-            const rowNum = tbody.rows.length;
-            
-            newRow.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td>${rowNum}</td>
-                <td><input type="text"></td>
-            `;
+            createCommonRow('insuranceTableBody', `<td><input type="text" placeholder="Company name"></td>`);
         }
 
         // Initialize
-        window.addEventListener('DOMContentLoaded', function() {
-            console.log('Vendor page loaded');
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Vendor Management page loaded');
+            // Add a few dummy rows for demonstration if needed
+            addBillToRow();
         });
     </script>
 </body>
