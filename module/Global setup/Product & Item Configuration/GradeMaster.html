@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Master | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="template/css/design-system.css">
+    <link rel="stylesheet" href="template/css/components.css">
+
+    <style>
+        .dropdown-with-clear {
+            position: relative;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #CBD5E1;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .clear-btn:hover {
+            color: #64748B;
+        }
+
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 700px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Grade Master</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Menu">
+                        <span class="material-icons" style="color: #64748B;">menu</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons" style="color: #64748B;">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section" style="margin-top: 1.5rem;">
+
+                <!-- Row 1: Company & Grade Code -->
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1.5rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label class="required">Company</label>
+                        <div class="dropdown-with-clear">
+                            <select id="company">
+                                <option value="">Select an option</option>
+                                <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearCompany()" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="fb-form-group">
+                        <label class="required">Grade Code</label>
+                        <input type="text" id="gradeCode" placeholder="Enter Grade Code">
+                    </div>
+                </div>
+
+                <!-- Row 2: Grade Name & Active -->
+                <div class="fb-grid-2" style="gap: 2.5rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label class="required">Grade Name</label>
+                        <input type="text" id="gradeName" placeholder="Enter Grade Name">
+                    </div>
+
+                    <div class="fb-form-group">
+                        <label>Active</label>
+                        <div class="toggle-label-container" style="padding-bottom: 8px;">
+                            <label class="fb-toggle-switch">
+                                <input type="checkbox" id="active" checked>
+                                <span class="fb-toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Clear company dropdown
+        function clearCompany() {
+            document.getElementById('company').value = '';
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company');
+            const code = document.getElementById('gradeCode');
+            const name = document.getElementById('gradeName');
+
+            let isValid = true;
+
+            // Reset error styles
+            [company, code, name].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Validate required fields
+            if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
+            if (!code.value.trim()) { code.classList.add('fb-input-error'); isValid = false; }
+            if (!name.value.trim()) { name.classList.add('fb-input-error'); isValid = false; }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
+                return;
+            }
+
+            const formData = {
+                company: company.value,
+                gradeCode: code.value.trim(),
+                gradeName: name.value.trim(),
+                active: document.getElementById('active').checked
+            };
+
+            console.log('Grade Master Form Data:', formData);
+            alert('Grade Master Details saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            document.getElementById('company').value = '';
+            document.getElementById('gradeCode').value = '';
+            document.getElementById('gradeName').value = '';
+            document.getElementById('active').checked = true;
+
+            // Remove error styling
+            [document.getElementById('company'), document.getElementById('gradeCode'), document.getElementById('gradeName')].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Focus on primary field
+            document.getElementById('company').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Grade Master page loaded');
+        });
+    </script>
+</body>
+
+</html>

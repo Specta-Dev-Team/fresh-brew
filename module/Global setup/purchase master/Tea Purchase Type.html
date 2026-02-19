@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea Purchase Type | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
+
+    <style>
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 500px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Tea Purchase Type</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="List View">
+                        <span class="material-icons">list</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section">
+                <div class="fb-grid-1" style="gap: 1.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Purchase Type</label>
+                        <input type="text" id="purchaseType" placeholder="Enter purchase type (e.g., Local)...">
+                    </div>
+
+                    <!-- Row 2: Toggles aligned horizontally -->
+                    <div class="fb-grid-2" style="gap: 2.5rem;">
+                        <div class="fb-form-group">
+                            <label style="padding-top: 18px;">Active</label>
+                            <div class="toggle-label-container" style="padding-top: 5px;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="active" checked>
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="fb-form-group">
+                            <label style="padding-top: 18px;">Bill Based on PO?</label>
+                            <div class="toggle-label-container" style="padding-top: 5px;">
+                                <label class="fb-toggle-switch">
+                                    <input type="checkbox" id="billBasedOnPO">
+                                    <span class="fb-toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        function handleSubmit() {
+            const purchaseType = document.getElementById('purchaseType');
+
+            let isValid = true;
+
+            // Reset error styles
+            purchaseType.classList.remove('fb-input-error');
+
+            // Validate required fields
+            if (!purchaseType.value.trim()) {
+                purchaseType.classList.add('fb-input-error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert('Please fill in the required Purchase Type field.');
+                return;
+            }
+
+            const formData = {
+                purchaseType: purchaseType.value.trim(),
+                active: document.getElementById('active').checked,
+                billBasedOnPO: document.getElementById('billBasedOnPO').checked
+            };
+
+            console.log('Tea Purchase Type Form Data:', formData);
+            alert('Tea Purchase Type saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            document.getElementById('purchaseType').value = '';
+            document.getElementById('active').checked = true;
+            document.getElementById('billBasedOnPO').checked = false;
+
+            // Remove error styling
+            document.getElementById('purchaseType').classList.remove('fb-input-error');
+
+            // Focus on primary field
+            document.getElementById('purchaseType').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Tea Purchase Type page loaded');
+        });
+    </script>
+</body>
+
+</html>

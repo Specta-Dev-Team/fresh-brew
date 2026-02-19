@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevation Master | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
+
+    <style>
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 700px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Elevation Master</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="List View">
+                        <span class="material-icons">list</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section">
+                <!-- Row 1: Code & Name -->
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Elevation Code</label>
+                        <input type="text" id="elevationCode" placeholder="Enter elevation code...">
+                    </div>
+
+                    <div class="fb-form-group">
+                        <label class="required">Elevation Name</label>
+                        <input type="text" id="elevationName" placeholder="Enter elevation name...">
+                    </div>
+                </div>
+
+                <!-- Row 2: Moisture & Active -->
+                <div class="fb-grid-2" style="gap: 2.5rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label>Max Allowed Moisture</label>
+                        <input type="number" id="maxMoisture" placeholder="0.00" step="0.01">
+                    </div>
+
+                    <div class="fb-form-group">
+                        <label>Active?</label>
+                        <div class="toggle-label-container" style="padding-bottom: 8px;">
+                            <label class="fb-toggle-switch">
+                                <input type="checkbox" id="active" checked>
+                                <span class="fb-toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        function handleSubmit() {
+            const code = document.getElementById('elevationCode');
+            const name = document.getElementById('elevationName');
+
+            let isValid = true;
+
+            // Reset error styles
+            [code, name].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Validate required fields
+            if (!code.value.trim()) { code.classList.add('fb-input-error'); isValid = false; }
+            if (!name.value.trim()) { name.classList.add('fb-input-error'); isValid = false; }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
+                return;
+            }
+
+            const formData = {
+                code: code.value.trim(),
+                name: name.value.trim(),
+                maxMoisture: document.getElementById('maxMoisture').value,
+                active: document.getElementById('active').checked
+            };
+
+            console.log('Elevation Master Form Data:', formData);
+            alert('Elevation Master saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            document.getElementById('elevationCode').value = '';
+            document.getElementById('elevationName').value = '';
+            document.getElementById('maxMoisture').value = '';
+            document.getElementById('active').checked = true;
+
+            // Remove error styling
+            [document.getElementById('elevationCode'), document.getElementById('elevationName')].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Focus on primary field
+            document.getElementById('elevationCode').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Elevation Master page loaded');
+        });
+    </script>
+</body>
+
+</html>

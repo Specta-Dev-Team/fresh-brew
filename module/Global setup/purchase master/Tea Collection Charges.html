@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea Collection Charges | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
+
+    <style>
+        .dropdown-with-clear {
+            position: relative;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #CBD5E1;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .clear-btn:hover {
+            color: #64748B;
+        }
+
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 700px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Tea Collection Charges</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="List View">
+                        <span class="material-icons">list</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section" style="margin-top: 1rem;">
+                <!-- Row 1: Company & Charge Name -->
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Company</label>
+                        <div class="dropdown-with-clear">
+                            <select id="company">
+                                <option value="">Select an option</option>
+                                <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                                <option value="other">Other Company</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearCompany()" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="fb-form-group">
+                        <label class="required">Charge Name</label>
+                        <input type="text" id="chargeName" placeholder="Enter charge name...">
+                    </div>
+                </div>
+
+                <!-- Row 2: Tea Charges -->
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Tea Charges</label>
+                        <input type="text" id="teaCharges" placeholder="Enter tea charges...">
+                    </div>
+                    <div></div> <!-- Spacer for balance -->
+                </div>
+
+                <!-- Row 3: Description (Expanded) -->
+                <div class="fb-grid-1">
+                    <div class="fb-form-group">
+                        <label>Description</label>
+                        <textarea id="description" placeholder="Enter detailed description..." rows="3"
+                            style="resize: vertical;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Clear company dropdown
+        function clearCompany() {
+            document.getElementById('company').value = '';
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company');
+            const chargeName = document.getElementById('chargeName');
+            const teaCharges = document.getElementById('teaCharges');
+
+            let isValid = true;
+
+            // Reset error styles
+            [company, chargeName, teaCharges].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Validate required fields
+            if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
+            if (!chargeName.value.trim()) { chargeName.classList.add('fb-input-error'); isValid = false; }
+            if (!teaCharges.value.trim()) { teaCharges.classList.add('fb-input-error'); isValid = false; }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
+                return;
+            }
+
+            const formData = {
+                company: company.value,
+                chargeName: chargeName.value.trim(),
+                teaCharges: teaCharges.value.trim(),
+                description: document.getElementById('description').value.trim()
+            };
+
+            console.log('Tea Collection Charges Form Data:', formData);
+            alert('Tea Collection Charges saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            document.getElementById('company').value = '';
+            document.getElementById('chargeName').value = '';
+            document.getElementById('teaCharges').value = '';
+            document.getElementById('description').value = '';
+
+            // Remove error styling
+            [document.getElementById('company'), document.getElementById('chargeName'), document.getElementById('teaCharges')].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Focus on primary field
+            document.getElementById('company').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Tea Collection Charges page loaded');
+        });
+    </script>
+</body>
+
+</html>

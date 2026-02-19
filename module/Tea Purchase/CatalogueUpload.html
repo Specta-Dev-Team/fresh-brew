@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Upload | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="template/css/design-system.css">
+    <link rel="stylesheet" href="template/css/components.css">
+
+    <style>
+        .dropdown-with-clear {
+            position: relative;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #CBD5E1;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .clear-btn:hover {
+            color: #64748B;
+        }
+
+        /* File Upload Trigger Refinements */
+        .fb-upload-trigger {
+            border: 2px dashed var(--border-medium);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .fb-upload-trigger:hover {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.02);
+        }
+
+        .fb-upload-trigger .material-icons {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .fb-upload-trigger span {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Prominent Button Refinements */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 850px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Catalogue Upload</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Menu">
+                        <span class="material-icons" style="color: #64748B;">menu</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons" style="color: #64748B;">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section" style="margin-top: 1rem;">
+
+                <!-- Row 1: Company -->
+                <div class="fb-grid-1" style="margin-bottom: 1rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Company</label>
+                        <div class="dropdown-with-clear">
+                            <select id="company">
+                                <option value="">Select an option</option>
+                                <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearCompany()" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Doc. Id., Sale Date, Sale Year -->
+                <div class="fb-grid-3" style="gap: 2rem; margin-bottom: 1rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label>Doc. Id.</label>
+                        <input type="text" id="docId" value="Auto" readonly>
+                    </div>
+                    <div class="fb-form-group">
+                        <label class="required">Sale Date</label>
+                        <input type="date" id="saleDate" value="2026-02-17">
+                    </div>
+                    <div class="fb-form-group">
+                        <label class="required">Sale Year</label>
+                        <input type="text" id="saleYear" value="2026">
+                    </div>
+                </div>
+
+                <!-- Row 3: Sale No, Sale Code, Broker Code -->
+                <div class="fb-grid-3" style="gap: 2rem; margin-bottom: 1rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label class="required">Sale No</label>
+                        <input type="text" id="saleNo" value="07/2026">
+                    </div>
+                    <div class="fb-form-group">
+                        <label class="required">Sale Code</label>
+                        <input type="text" id="saleCode" value="07/2026">
+                    </div>
+                    <div class="fb-form-group">
+                        <label class="required">Broker Code</label>
+                        <div class="dropdown-with-clear">
+                            <select id="brokerCode">
+                                <option value="">-- Select --</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearDropdown('brokerCode')" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Upload -->
+                <div class="fb-grid-1" style="margin-top: 1rem;">
+                    <div class="fb-form-group">
+                        <label>Upload Catalogue</label>
+                        <input type="file" id="fileUpload" style="display: none;" onchange="handleFileChange(this)">
+                        <div class="fb-upload-trigger" onclick="document.getElementById('fileUpload').click()">
+                            <span class="material-icons">cloud_upload</span>
+                            <span id="fileNameDisplay">Drop files here or click to upload</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Clear dropdown
+        function clearCompany() {
+            document.getElementById('company').value = '';
+        }
+
+        function clearDropdown(id) {
+            document.getElementById(id).value = '';
+        }
+
+        // Handle file change
+        function handleFileChange(input) {
+            const display = document.getElementById('fileNameDisplay');
+            if (input.files && input.files[0]) {
+                display.textContent = input.files[0].name;
+                display.style.color = 'var(--text-main)';
+            } else {
+                display.textContent = 'Drop files here or click to upload';
+                display.style.color = 'var(--primary)';
+            }
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company');
+            const saleDate = document.getElementById('saleDate');
+            const saleYear = document.getElementById('saleYear');
+            const saleNo = document.getElementById('saleNo');
+            const saleCode = document.getElementById('saleCode');
+            const brokerCode = document.getElementById('brokerCode');
+
+            let isValid = true;
+
+            // Reset error styles
+            [company, saleDate, saleYear, saleNo, saleCode, brokerCode].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Validate required fields
+            if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
+            if (!saleDate.value) { saleDate.classList.add('fb-input-error'); isValid = false; }
+            if (!saleYear.value.trim()) { saleYear.classList.add('fb-input-error'); isValid = false; }
+            if (!saleNo.value.trim()) { saleNo.classList.add('fb-input-error'); isValid = false; }
+            if (!saleCode.value.trim()) { saleCode.classList.add('fb-input-error'); isValid = false; }
+            if (!brokerCode.value) { brokerCode.classList.add('fb-input-error'); isValid = false; }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
+                return;
+            }
+
+            const formData = {
+                company: company.value,
+                docId: document.getElementById('docId').value,
+                saleDate: saleDate.value,
+                saleYear: saleYear.value.trim(),
+                saleNo: saleNo.value.trim(),
+                saleCode: saleCode.value.trim(),
+                brokerCode: brokerCode.value,
+                fileName: document.getElementById('fileNameDisplay').textContent
+            };
+
+            console.log('Catalogue Upload Form Data:', formData);
+            alert('Catalogue uploaded and details saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset fields
+            document.getElementById('company').value = '';
+            document.getElementById('docId').value = 'Auto';
+            document.getElementById('saleDate').value = '2026-02-17';
+            document.getElementById('saleYear').value = '2026';
+            document.getElementById('saleNo').value = '';
+            document.getElementById('saleCode').value = '';
+            document.getElementById('brokerCode').value = '';
+            document.getElementById('fileNameDisplay').textContent = 'Drop files here or click to upload';
+            document.getElementById('fileNameDisplay').style.color = 'var(--primary)';
+
+            // Remove error styling
+            [document.getElementById('company'), document.getElementById('saleDate'), document.getElementById('saleYear'),
+            document.getElementById('saleNo'), document.getElementById('saleCode'), document.getElementById('brokerCode')]
+                .forEach(el => el.classList.remove('fb-input-error'));
+
+            // Focus on primary field
+            document.getElementById('company').focus();
+            console.log('Form cleared for new upload');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Catalogue Upload page loaded');
+        });
+    </script>
+</body>
+
+</html>

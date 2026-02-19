@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorry Master | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
+
+    <style>
+        .dropdown-with-clear {
+            position: relative;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #CBD5E1;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .clear-btn:hover {
+            color: #64748B;
+        }
+
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+
+        .label-with-unit {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .label-unit {
+            font-size: 0.75rem;
+            color: #64748B;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper" style="align-items: center;">
+        <div class="fb-glass-card" style="max-width: 800px;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Lorry Master</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="List View">
+                        <span class="material-icons">list</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section">
+
+                <!-- Row 1: Company & Lorry Code -->
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Company Name</label>
+                        <div class="dropdown-with-clear">
+                            <select id="company">
+                                <option value="">Select an option</option>
+                                <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                                <option value="other">Other Company</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearCompany()" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fb-form-group">
+                        <label class="required">Lorry Code</label>
+                        <input type="text" id="lorryCode" placeholder="Enter lorry code...">
+                    </div>
+                </div>
+
+                <!-- Row 2: Lorry Name & Capacity -->
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Lorry Name</label>
+                        <input type="text" id="lorryName" placeholder="Enter lorry name...">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Capacity (Kgs.)</label>
+                        <input type="number" id="capacity" placeholder="0.00" step="0.01">
+                    </div>
+                </div>
+
+                <!-- Row 3: CBM & Driver Name -->
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label>CBM</label>
+                        <input type="number" id="cbm" placeholder="0.00" step="0.01">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Driver Name</label>
+                        <input type="text" id="driverName" placeholder="Enter driver name...">
+                    </div>
+                </div>
+
+                <!-- Row 4: Cleaner Name & Status -->
+                <div class="fb-grid-2" style="gap: 2.5rem; align-items: flex-end;">
+                    <div class="fb-form-group">
+                        <label>Cleaner Name</label>
+                        <input type="text" id="cleanerName" placeholder="Enter cleaner name...">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Active</label>
+                        <div class="toggle-label-container" style="padding-bottom: 8px;">
+                            <label class="fb-toggle-switch">
+                                <input type="checkbox" id="active" checked>
+                                <span class="fb-toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Clear company dropdown
+        function clearCompany() {
+            document.getElementById('company').value = '';
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company');
+            const lorryCode = document.getElementById('lorryCode');
+            const lorryName = document.getElementById('lorryName');
+
+            let isValid = true;
+
+            // Reset error styles
+            [company, lorryCode, lorryName].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Validate required fields
+            if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
+            if (!lorryCode.value.trim()) { lorryCode.classList.add('fb-input-error'); isValid = false; }
+            if (!lorryName.value.trim()) { lorryName.classList.add('fb-input-error'); isValid = false; }
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked in red.');
+                return;
+            }
+
+            const formData = {
+                company: company.value,
+                lorryCode: lorryCode.value.trim(),
+                lorryName: lorryName.value.trim(),
+                capacity: document.getElementById('capacity').value,
+                cbm: document.getElementById('cbm').value,
+                driverName: document.getElementById('driverName').value.trim(),
+                cleanerName: document.getElementById('cleanerName').value.trim(),
+                active: document.getElementById('active').checked
+            };
+
+            console.log('Lorry Master Form Data:', formData);
+            alert('Lorry Master saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            document.getElementById('company').value = '';
+            document.getElementById('lorryCode').value = '';
+            document.getElementById('lorryName').value = '';
+            document.getElementById('capacity').value = '';
+            document.getElementById('cbm').value = '';
+            document.getElementById('driverName').value = '';
+            document.getElementById('cleanerName').value = '';
+            document.getElementById('active').checked = true;
+
+            // Remove error styling
+            [document.getElementById('company'), document.getElementById('lorryCode'), document.getElementById('lorryName')].forEach(el => el.classList.remove('fb-input-error'));
+
+            // Focus on primary field
+            document.getElementById('company').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Lorry Master page loaded');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea Plantation Master | Fresh Brew</title>
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Fresh Brew Design System -->
+    <link rel="stylesheet" href="template/css/design-system.css">
+    <link rel="stylesheet" href="template/css/components.css">
+
+    <style>
+        .dropdown-with-clear {
+            position: relative;
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #CBD5E1;
+            padding: 0.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .clear-btn:hover {
+            color: #64748B;
+        }
+
+        /* Section Styling */
+        .fb-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border-light);
+        }
+
+        .fb-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Prominent Button Refinements (Compact Scaling) */
+        .fb-btn-prominent {
+            padding: 0.7rem 1.75rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .fb-form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-light);
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fb-wrapper">
+        <div class="fb-glass-card" style="width: 100%; margin: 1rem;">
+
+            <!-- HEADER -->
+            <div class="fb-header">
+                <div class="fb-page-title">
+                    <h1>Tea Plantation Master</h1>
+                </div>
+                <div class="fb-header-actions">
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Menu">
+                        <span class="material-icons" style="color: #64748B;">menu</span>
+                    </button>
+                    <button class="fb-btn fb-btn-white fb-btn-sm" title="Grid View">
+                        <span class="material-icons" style="color: #64748B;">grid_on</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FORM SECTION -->
+            <div class="fb-form-section" style="margin-top: 1.5rem;">
+
+                <!-- 1. BASIC INFO -->
+                <div class="fb-section-title">
+                    <span class="material-icons" style="font-size: 1.2rem;">business</span> BASIC INFO
+                </div>
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1.5rem;">
+                    <div class="fb-form-group">
+                        <label class="required">Company</label>
+                        <div class="dropdown-with-clear">
+                            <select id="company">
+                                <option value="">Select an option</option>
+                                <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                            </select>
+                            <button class="clear-btn" onclick="clearCompany()" title="Clear">
+                                <span class="material-icons" style="font-size: 1.2rem;">close</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Contact Person</label>
+                        <input type="text" id="contactPerson" placeholder="Enter Contact Person">
+                    </div>
+                </div>
+
+                <!-- 2. TAX DETAILS -->
+                <div class="fb-section-title">
+                    <span class="material-icons" style="font-size: 1.2rem;">payments</span> TAX DETAILS
+                </div>
+                <div class="fb-grid-4" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div class="fb-form-group">
+                        <label>Tax Code</label>
+                        <select id="taxCode">
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Tax (%)</label>
+                        <input type="text" id="taxPercent" placeholder="Tax (%)">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Vat No</label>
+                        <input type="text" id="vatNo" placeholder="Vat No">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Tin No</label>
+                        <input type="text" id="tinNo" placeholder="Tin No">
+                    </div>
+                </div>
+
+                <!-- 3. ADDRESS & CONTACT -->
+                <div class="fb-section-title">
+                    <span class="material-icons" style="font-size: 1.2rem;">location_on</span> ADDRESS & CONTACT
+                </div>
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1rem;">
+                    <div class="fb-form-group">
+                        <label>Address 1</label>
+                        <input type="text" id="address1" placeholder="Address line 1">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Address 2</label>
+                        <input type="text" id="address2" placeholder="Address line 2">
+                    </div>
+                </div>
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1rem;">
+                    <div class="fb-form-group">
+                        <label>Address 3</label>
+                        <input type="text" id="address3" placeholder="Address line 3">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Province</label>
+                        <input type="text" id="province" placeholder="Province">
+                    </div>
+                </div>
+                <div class="fb-grid-3" style="gap: 1.5rem; margin-bottom: 1rem;">
+                    <div class="fb-form-group">
+                        <label>Pin Code</label>
+                        <input type="text" id="pinCode" placeholder="Pin Code">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Telephone</label>
+                        <input type="text" id="telephone" placeholder="Telephone">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Fax</label>
+                        <input type="text" id="fax" placeholder="Fax">
+                    </div>
+                </div>
+                <div class="fb-grid-1" style="max-width: 485px; margin-bottom: 1.5rem;">
+                    <div class="fb-form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="Email Address">
+                    </div>
+                </div>
+
+                <!-- 4. PLANTATION IDENTIFICATION -->
+                <div class="fb-section-title">
+                    <span class="material-icons" style="font-size: 1.2rem;">park</span> PLANTATION IDENTIFICATION
+                </div>
+                <div class="fb-grid-2" style="gap: 2.5rem;">
+                    <div class="fb-form-group">
+                        <label>Plantation Code</label>
+                        <input type="text" id="plantationCode" placeholder="Plantation Code">
+                    </div>
+                    <div class="fb-form-group">
+                        <label>Plantation Name</label>
+                        <input type="text" id="plantationName" placeholder="Plantation Name">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="fb-form-actions">
+                <button class="fb-btn fb-btn-secondary fb-btn-prominent" onclick="handleNew()">
+                    <span class="material-icons">add</span>
+                    New
+                </button>
+                <button class="fb-btn fb-btn-primary fb-btn-prominent" onclick="handleSubmit()">
+                    <span class="material-icons">check</span>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Clear company dropdown
+        function clearCompany() {
+            document.getElementById('company').value = '';
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            const company = document.getElementById('company');
+
+            let isValid = true;
+
+            // Reset error styles
+            company.classList.remove('fb-input-error');
+
+            // Validate required fields
+            if (!company.value) {
+                company.classList.add('fb-input-error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert('Please select a Company.');
+                return;
+            }
+
+            const formData = {
+                company: company.value,
+                contactPerson: document.getElementById('contactPerson').value.trim(),
+                taxCode: document.getElementById('taxCode').value,
+                taxPercent: document.getElementById('taxPercent').value.trim(),
+                vatNo: document.getElementById('vatNo').value.trim(),
+                tinNo: document.getElementById('tinNo').value.trim(),
+                address1: document.getElementById('address1').value.trim(),
+                address2: document.getElementById('address2').value.trim(),
+                address3: document.getElementById('address3').value.trim(),
+                province: document.getElementById('province').value.trim(),
+                pinCode: document.getElementById('pinCode').value.trim(),
+                telephone: document.getElementById('telephone').value.trim(),
+                fax: document.getElementById('fax').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                plantationCode: document.getElementById('plantationCode').value.trim(),
+                plantationName: document.getElementById('plantationName').value.trim()
+            };
+
+            console.log('Tea Plantation Master Form Data:', formData);
+            alert('Tea Plantation Details saved successfully!');
+        }
+
+        // Handle new record
+        function handleNew() {
+            // Reset all inputs
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.tagName === 'SELECT') input.value = '';
+                else input.value = '';
+            });
+
+            // Remove error styling
+            document.getElementById('company').classList.remove('fb-input-error');
+
+            // Focus on primary field
+            document.getElementById('company').focus();
+            console.log('Form cleared for new record');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('Tea Plantation Master page loaded');
+        });
+    </script>
+</body>
+
+</html>
