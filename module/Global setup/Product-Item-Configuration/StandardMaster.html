@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Types | Fresh Brew</title>
+    <title>Standard Master | Fresh Brew</title>
 
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Fresh Brew Design System -->
-    <link rel="stylesheet" href="template/css/design-system.css">
-    <link rel="stylesheet" href="template/css/components.css">
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
 
     <style>
         .dropdown-with-clear {
@@ -68,7 +68,7 @@
             <!-- HEADER -->
             <div class="fb-header">
                 <div class="fb-page-title">
-                    <h1>Item Types</h1>
+                    <h1>Standard Master</h1>
                 </div>
                 <div class="fb-header-actions">
                     <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
@@ -87,13 +87,14 @@
             <div class="fb-form-section" style="margin-top: 1.5rem;">
 
                 <!-- Row 1: Company -->
-                <div class="fb-grid-1" style="margin-bottom: 1.5rem;">
+                <div class="fb-grid-1" style="margin-bottom: 2rem;">
                     <div class="fb-form-group">
                         <label class="required">Company</label>
                         <div class="dropdown-with-clear">
                             <select id="company">
                                 <option value="">Select an option</option>
                                 <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
+                                <option value="other">Other Company</option>
                             </select>
                             <button class="clear-btn" onclick="clearCompany()" title="Clear">
                                 <span class="material-icons" style="font-size: 1.2rem;">close</span>
@@ -102,31 +103,18 @@
                     </div>
                 </div>
 
-                <!-- Row 2: Item Type -->
-                <div class="fb-grid-1" style="margin-bottom: 2rem;">
+                <!-- Row 2: Standard Code & Active -->
+                <div class="fb-grid-2" style="gap: 2.5rem; align-items: flex-end;">
                     <div class="fb-form-group">
-                        <label class="required">Item Type</label>
-                        <input type="text" id="itemType" placeholder="Enter Item Type">
-                    </div>
-                </div>
-
-                <!-- Row 3: Lot Applicable & Fixed Asset Toggles -->
-                <div class="fb-grid-2" style="gap: 2.5rem; align-items: center;">
-                    <div class="fb-form-group">
-                        <label>Lot Applicable ?</label>
-                        <div class="toggle-label-container" style="padding-bottom: 8px;">
-                            <label class="fb-toggle-switch">
-                                <input type="checkbox" id="lotApplicable" checked>
-                                <span class="fb-toggle-slider"></span>
-                            </label>
-                        </div>
+                        <label class="required">Standard Code</label>
+                        <input type="text" id="stcode" placeholder="Enter Standard Code">
                     </div>
 
                     <div class="fb-form-group">
-                        <label>Fixed Asset ?</label>
+                        <label>Active</label>
                         <div class="toggle-label-container" style="padding-bottom: 8px;">
                             <label class="fb-toggle-switch">
-                                <input type="checkbox" id="fixedAsset" checked>
+                                <input type="checkbox" id="active" checked>
                                 <span class="fb-toggle-slider"></span>
                             </label>
                         </div>
@@ -149,6 +137,9 @@
         </div>
     </div>
 
+    <!-- Script inclusion matching original name (if exists) -->
+    <script src="stanardmasterjs.js"></script>
+
     <script>
         // Clear company dropdown
         function clearCompany() {
@@ -158,16 +149,16 @@
         // Handle form submission
         function handleSubmit() {
             const company = document.getElementById('company');
-            const itemType = document.getElementById('itemType');
+            const stcode = document.getElementById('stcode');
 
             let isValid = true;
 
             // Reset error styles
-            [company, itemType].forEach(el => el.classList.remove('fb-input-error'));
+            [company, stcode].forEach(el => el.classList.remove('fb-input-error'));
 
             // Validate required fields
             if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
-            if (!itemType.value.trim()) { itemType.classList.add('fb-input-error'); isValid = false; }
+            if (!stcode.value.trim()) { stcode.classList.add('fb-input-error'); isValid = false; }
 
             if (!isValid) {
                 alert('Please fill in all required fields marked in red.');
@@ -176,34 +167,38 @@
 
             const formData = {
                 company: company.value,
-                itemType: itemType.value.trim(),
-                lotApplicable: document.getElementById('lotApplicable').checked,
-                fixedAsset: document.getElementById('fixedAsset').checked
+                stcode: stcode.value.trim(),
+                active: document.getElementById('active').checked
             };
 
-            console.log('Item Types Form Data:', formData);
-            alert('Item Type Details saved successfully!');
+            console.log('Standard Master Form Data:', formData);
+            alert('Standard Master Details saved successfully!');
+
+            // Optionally call external save function if defined in stanardmasterjs.js
+            if (typeof axSave === 'function') axSave();
         }
 
         // Handle new record
         function handleNew() {
             // Reset all inputs
             document.getElementById('company').value = '';
-            document.getElementById('itemType').value = '';
-            document.getElementById('lotApplicable').checked = true;
-            document.getElementById('fixedAsset').checked = true;
+            document.getElementById('stcode').value = '';
+            document.getElementById('active').checked = true;
 
             // Remove error styling
-            [document.getElementById('company'), document.getElementById('itemType')].forEach(el => el.classList.remove('fb-input-error'));
+            [document.getElementById('company'), document.getElementById('stcode')].forEach(el => el.classList.remove('fb-input-error'));
 
             // Focus on primary field
             document.getElementById('company').focus();
             console.log('Form cleared for new record');
+
+            // Optionally call external new function if defined in stanardmasterjs.js
+            if (typeof axNew === 'function') axNew();
         }
 
         // Initialize
         window.addEventListener('DOMContentLoaded', function () {
-            console.log('Item Types page loaded');
+            console.log('Standard Master page loaded');
         });
     </script>
 </body>

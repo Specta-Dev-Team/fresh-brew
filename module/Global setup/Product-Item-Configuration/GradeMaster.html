@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Standard Master | Fresh Brew</title>
+    <title>Grade Master | Fresh Brew</title>
 
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Fresh Brew Design System -->
-    <link rel="stylesheet" href="template/css/design-system.css">
-    <link rel="stylesheet" href="template/css/components.css">
+    <link rel="stylesheet" href="../../../template/css/design-system.css">
+    <link rel="stylesheet" href="../../../template/css/components.css">
 
     <style>
         .dropdown-with-clear {
@@ -63,12 +63,12 @@
 <body>
 
     <div class="fb-wrapper" style="align-items: center;">
-        <div class="fb-glass-card" style="max-width: 650px;">
+        <div class="fb-glass-card" style="max-width: 700px;">
 
             <!-- HEADER -->
             <div class="fb-header">
                 <div class="fb-page-title">
-                    <h1>Standard Master</h1>
+                    <h1>Grade Master</h1>
                 </div>
                 <div class="fb-header-actions">
                     <button class="fb-btn fb-btn-white fb-btn-sm" title="Search">
@@ -86,28 +86,32 @@
             <!-- FORM SECTION -->
             <div class="fb-form-section" style="margin-top: 1.5rem;">
 
-                <!-- Row 1: Company -->
-                <div class="fb-grid-1" style="margin-bottom: 2rem;">
+                <!-- Row 1: Company & Grade Code -->
+                <div class="fb-grid-2" style="gap: 2.5rem; margin-bottom: 1.5rem; align-items: flex-end;">
                     <div class="fb-form-group">
                         <label class="required">Company</label>
                         <div class="dropdown-with-clear">
                             <select id="company">
                                 <option value="">Select an option</option>
                                 <option value="vintage" selected>Vintage Teas Ceylon (Pvt) Ltd</option>
-                                <option value="other">Other Company</option>
                             </select>
                             <button class="clear-btn" onclick="clearCompany()" title="Clear">
                                 <span class="material-icons" style="font-size: 1.2rem;">close</span>
                             </button>
                         </div>
                     </div>
+
+                    <div class="fb-form-group">
+                        <label class="required">Grade Code</label>
+                        <input type="text" id="gradeCode" placeholder="Enter Grade Code">
+                    </div>
                 </div>
 
-                <!-- Row 2: Standard Code & Active -->
+                <!-- Row 2: Grade Name & Active -->
                 <div class="fb-grid-2" style="gap: 2.5rem; align-items: flex-end;">
                     <div class="fb-form-group">
-                        <label class="required">Standard Code</label>
-                        <input type="text" id="stcode" placeholder="Enter Standard Code">
+                        <label class="required">Grade Name</label>
+                        <input type="text" id="gradeName" placeholder="Enter Grade Name">
                     </div>
 
                     <div class="fb-form-group">
@@ -137,9 +141,6 @@
         </div>
     </div>
 
-    <!-- Script inclusion matching original name (if exists) -->
-    <script src="stanardmasterjs.js"></script>
-
     <script>
         // Clear company dropdown
         function clearCompany() {
@@ -149,16 +150,18 @@
         // Handle form submission
         function handleSubmit() {
             const company = document.getElementById('company');
-            const stcode = document.getElementById('stcode');
+            const code = document.getElementById('gradeCode');
+            const name = document.getElementById('gradeName');
 
             let isValid = true;
 
             // Reset error styles
-            [company, stcode].forEach(el => el.classList.remove('fb-input-error'));
+            [company, code, name].forEach(el => el.classList.remove('fb-input-error'));
 
             // Validate required fields
             if (!company.value) { company.classList.add('fb-input-error'); isValid = false; }
-            if (!stcode.value.trim()) { stcode.classList.add('fb-input-error'); isValid = false; }
+            if (!code.value.trim()) { code.classList.add('fb-input-error'); isValid = false; }
+            if (!name.value.trim()) { name.classList.add('fb-input-error'); isValid = false; }
 
             if (!isValid) {
                 alert('Please fill in all required fields marked in red.');
@@ -167,38 +170,34 @@
 
             const formData = {
                 company: company.value,
-                stcode: stcode.value.trim(),
+                gradeCode: code.value.trim(),
+                gradeName: name.value.trim(),
                 active: document.getElementById('active').checked
             };
 
-            console.log('Standard Master Form Data:', formData);
-            alert('Standard Master Details saved successfully!');
-
-            // Optionally call external save function if defined in stanardmasterjs.js
-            if (typeof axSave === 'function') axSave();
+            console.log('Grade Master Form Data:', formData);
+            alert('Grade Master Details saved successfully!');
         }
 
         // Handle new record
         function handleNew() {
             // Reset all inputs
             document.getElementById('company').value = '';
-            document.getElementById('stcode').value = '';
+            document.getElementById('gradeCode').value = '';
+            document.getElementById('gradeName').value = '';
             document.getElementById('active').checked = true;
 
             // Remove error styling
-            [document.getElementById('company'), document.getElementById('stcode')].forEach(el => el.classList.remove('fb-input-error'));
+            [document.getElementById('company'), document.getElementById('gradeCode'), document.getElementById('gradeName')].forEach(el => el.classList.remove('fb-input-error'));
 
             // Focus on primary field
             document.getElementById('company').focus();
             console.log('Form cleared for new record');
-
-            // Optionally call external new function if defined in stanardmasterjs.js
-            if (typeof axNew === 'function') axNew();
         }
 
         // Initialize
         window.addEventListener('DOMContentLoaded', function () {
-            console.log('Standard Master page loaded');
+            console.log('Grade Master page loaded');
         });
     </script>
 </body>
